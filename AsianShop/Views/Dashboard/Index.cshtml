@@ -1,0 +1,33 @@
+<div id="database" v-cloak align="center">
+    <div style="display: " id="dashboard">
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+    </div>
+    <div class="row">
+        <div class="container2 column imageDiv">
+            <img src="Resources/Images/Customers.png" alt="Avatar" class="images border border-dark" style="width: 100%">
+            <div class="middle">
+                <button class="text" v-on:click="openCustomerViewPartial">Customer</button>
+            </div>
+        </div>
+
+        <div class="container2 column imageDiv">
+            <img src="Resources/Images/products.png" alt="Avatar" class="images border border-dark" style="width: 100%">
+            <div class="middle">
+                <button class="text" v-on:click="openProductViewPartial">Products</button>
+            </div>
+        </div>
+
+        <div class="container2 column imageDiv">
+            <img src="Resources/Images/Orders.png" alt="Avatar" class="images border border-dark" style="width: 100%">
+            <div class="middle">
+                <button class="text" v-on:click="openOrderViewPartial">Orders</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <partial name="~/Views/Shared/Dashboard/_CustomerPartial.cshtml"/>
+    <partial name="~/Views/Shared/Dashboard/_OrderPartial.cshtml"/>
+    <partial name="~/Views/Shared/Dashboard/_ProductPartial.cshtml"/>
+
+</div>
