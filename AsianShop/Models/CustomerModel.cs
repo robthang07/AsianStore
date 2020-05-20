@@ -21,8 +21,6 @@ namespace AsianShop.Models
         //Town of Customer, where they live
         public string PostPlace { get; set; }
         
-        public List<Order> Orders { get; set; }
-
         
         public Customer(string email, string firstName, string lastName, string phoneNumber, string postAddress, string postNumber, string postPlace)
         {

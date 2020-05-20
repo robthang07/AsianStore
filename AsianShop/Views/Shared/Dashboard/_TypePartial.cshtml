@@ -1,0 +1,92 @@
+<div id="types" style="display:none">
+    <div class="text-center">
+        <h1 class="display-4">Orders</h1>
+    </div>
+    <div class="divOnTableLayout">
+        <table class="table" border="1">
+            <thead>
+                <tr class="table-succes">
+                    <th>Id</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(type, index) in types">
+                    <td>{{type.id}}</td>
+                    <td>{{type.name}}</td>
+                    <td class="Remove">
+                        <button class="btn btn-danger" >Delete</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" >Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="form-group">
+        <button v-on:click="openAddModal" class="btn btn-success">Add Type</button>
+    </div>
+
+    <div id="addTypeModal" class="modal fade" tabindex="-1" role="dialog"aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <h2 style="text-align:center">Add Type</h2>
+                <h6 class="necessaryInfo"></h6>
+                <div class="form-group">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Name</label>
+                            <input class="form-control" placeholder="Name of the type" v-model="type.name" class="form-control">
+                        </div>                       
+                    </div>
+                    <div class="form-group">
+                        <button v-on:click="addType" class="btn btn-success"> Add Type</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="editCustomerModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="divOnTableLayout">
+                    <table class="table" border="1">
+                        <thead>
+                            <tr class="table-succes">
+                                <th>Id</th>
+                                <th>First name</th>
+                                <th>Last name</th>
+                                <th>Email</th>
+                                <th>Phone number</th>
+                                <th>Post number</th>
+                                <th>Post place</th>
+                                <th>Post address</th>
+                                <th>Delivery post number</th>
+                                <th>Delivery post place</th>
+                                <th>Delivery post address</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-succes">
+                                <td id="customerId">{{customer.id}}</td>
+                                <td id="customerFirstName" contenteditable="true">{{customer.firstName}}</td>
+                                <td id="customerLastName" contenteditable="true">{{customer.lastName}}</td>
+                                <td id="customerEmail" contenteditable="true">{{customer.email}}</td>
+                                <td id="customerPhoneNumber" contenteditable="true">{{customer.phoneNumber}}</td>
+                                <td id="customerPostNumber" contenteditable="true">{{customer.postNumber}}</td>
+                                <td id="customerPostPlace" contenteditable="true">{{customer.postPlace}}</td>
+                                <td id="customerPostAddress" contenteditable="true">{{customer.postAddress}}</td>
+                                <td id="customerDPostNumber" contenteditable="true">{{customer.deliveryPostNumber}}</td>
+                                <td id="customerDPostPlace" contenteditable="true">{{customer.deliveryPostPlace}}</td>
+                                <td id="customerDPostAddress" contenteditable="true">{{ customer.deliveryPostAddress}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

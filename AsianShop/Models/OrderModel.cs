@@ -32,8 +32,9 @@ namespace AsianShop.Models
             this.OrderLines = new List<OrderLine>();
             this.Discount = discount;
             this.TotalPrice = price;
-            this.OrderDate = DateTime.UtcNow.Date;
+            this.OrderDate = DateTime.Now.Date;
             this.Delivered = delivered;
+            this.LastPickUpDate = OrderDate.AddDays(7);
         }
         
     }

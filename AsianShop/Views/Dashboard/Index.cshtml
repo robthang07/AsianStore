@@ -24,10 +24,17 @@
                 <button class="text" v-on:click="openOrderViewPartial">Orders</button>
             </div>
         </div>
+        <div class="container2 column imageDiv">
+            <img src="Resources/Images/Orders.png" alt="Avatar" class="images border border-dark" style="width: 100%">
+            <div class="middle">
+                <button class="text" v-on:click="openTypeViewPartial">Types</button>
+            </div>
+        </div>
     </div>
     </div>
     <partial name="~/Views/Shared/Dashboard/_CustomerPartial.cshtml"/>
     <partial name="~/Views/Shared/Dashboard/_OrderPartial.cshtml"/>
     <partial name="~/Views/Shared/Dashboard/_ProductPartial.cshtml"/>
+    <partial name="~/Views/Shared/Dashboard/_TypePartial.cshtml"/>
 
 </div>

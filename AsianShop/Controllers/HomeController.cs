@@ -27,10 +27,6 @@ namespace AsianShop.Controllers
         {
             return View();
         }
-        public IActionResult Vegetables()
-        {
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

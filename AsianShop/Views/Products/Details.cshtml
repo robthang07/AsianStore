@@ -1,0 +1,68 @@
+@using System.Security.Claims
+@model AsianShop.Models.Product
+
+<div>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <h1>@Html.DisplayFor(model => model.Name)</h1>
+              <hr/>
+              @if (@Model.TypeId != 0)
+              {
+                  var picturePath = "/Resources/DatabaseFiles/" + @Model.Type.Name + "/" + @Model.Id + ".png";
+                  <img alt="Image" class="contain" src="@picturePath"/>
+              }
+              <dl class="row">
+                  <dt class="col-sm-2">
+                      @Html.DisplayNameFor(model => model.Name)
+                  </dt>
+                  <dd class="col-sm-10">
+                      @Html.DisplayFor(model => model.Name)
+                  </dd>
+                  <dt class="col-sm-2">
+                      @Html.DisplayNameFor(model => model.Price)
+                  </dt>
+                  <dd class="col-sm-10">
+                      @Html.DisplayFor(model => model.Price)
+                  </dd>
+                  <dt class="col-sm-2">
+                      @Html.DisplayNameFor(model => model.Type.Name)
+                  </dt>
+                  <dd class="col-sm-10">
+                      @Html.DisplayFor(model => model.Type.Name)
+                  </dd>
+              </dl>
+        </div>
+        <div class="col">
+          <h1>@Html.DisplayFor(model => model.Name)</h1>
+              <hr/>
+              @if (@Model.TypeId != 0)
+              {
+                  var picturePath = "/Resources/DatabaseFiles/" + @Model.Type.Name + "/" + @Model.Id + ".png";
+                  <img src="@picturePath"/>
+              }
+              <dl class="row">
+                  <dt class="col-sm-2">
+                      @Html.DisplayNameFor(model => model.Name)
+                  </dt>
+                  <dd class="col-sm-10">
+                      @Html.DisplayFor(model => model.Name)
+                  </dd>
+                  <dt class="col-sm-2">
+                      @Html.DisplayNameFor(model => model.Price)
+                  </dt>
+                  <dd class="col-sm-10">
+                      @Html.DisplayFor(model => model.Price)
+                  </dd>
+                  <dt class="col-sm-2">
+                      @Html.DisplayNameFor(model => model.Type.Name)
+                  </dt>
+                  <dd class="col-sm-10">
+                      @Html.DisplayFor(model => model.Type.Name)
+                  </dd>
+              </dl>
+        </div>
+      </div>     
+        </div>
+    
+</div>

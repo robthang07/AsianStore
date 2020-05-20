@@ -1,0 +1,21 @@
+@model IEnumerable<Product>
+
+<div class="row">
+   @foreach (var n in Model.Reverse())
+   {
+   var picturePath ="Resources/DatabaseFiles/"+n.Type.Name+"/"+ @n.Id+".png";
+      var price = n.Price +" kr/" +n.Unit;
+   <div class="column">
+      <div class="container-fluid">
+         <div class="card">
+            <a asp-action="Details" asp-route-id="@n.Id">
+            <img alt="@n.Name" class="contain" src="@picturePath" height="300"style="width:100%"/>
+            </a>
+            <h3>@n.Name</h3>
+            <p class="price">@price</p>
+            <a asp-action="Details" asp-route-id="@n.Id"><button>See more</button></a>
+         </div>
+      </div>
+   </div>
+   }
+</div>

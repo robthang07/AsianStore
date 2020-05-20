@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using AsianShop.Models;
 using Microsoft.AspNetCore.Identity;
+using Type = AsianShop.Models.Type;
 
 namespace AsianShop.Data
 {
@@ -24,13 +25,25 @@ namespace AsianShop.Data
 
             var user = new ApplicationUser { UserName = "user@uia.no", Email = "user@uia.no" };
             um.CreateAsync(user, "Password1.").Wait();
-
-            var item = new Product("Salat",225.222M,"testFilePath");
-            db.Add(item);
-            var item2 = new Product("Epler",12.99M,"TestFilePath2");
+            
+            var hotFood = new Type("Hot food");
+            db.Add(hotFood);
+            var fruit = new Type("Fruits");
+            db.Add(fruit);
+            var vegetable = new Type("Vegetables");
+            db.Add(vegetable);
+            db.SaveChanges();
+            
+            var item = new Product("Salad", 225.222M, "testFilePath", 50, vegetable.id,vegetable,"kg","Spain","Exotic");
             db.Add(item);
             db.SaveChanges();
-          
+            var item2 = new Product("Apples", 12.99M, "TestFilePath2", 30, fruit.id,fruit,"kg","France","Exotic");
+            db.Add(item2);
+            db.SaveChanges();
+            var item3 = new Product("Pizza", 12.99M, "TestFilePath2", 30, hotFood.id,hotFood,"piece","Italy","Exotic");
+            db.Add(item3);
+            db.SaveChanges();
+            
             var orderLine2 = new OrderLine(item2,55);
             var orderLine = new OrderLine(item,2);
             db.Add(orderLine);

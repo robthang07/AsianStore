@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using AsianShop.Models;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Type = AsianShop.Models.Type;
 
 
 namespace AsianShop.Data
@@ -29,7 +31,8 @@ namespace AsianShop.Data
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
-    
+        public DbSet<Type> Types { get; set; }
+
       
     }
 }
