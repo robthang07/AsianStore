@@ -8,8 +8,22 @@ $(document).ready(function() {
             product: {
                 id: 0,
                 name: "",
-                amount: 0,
-                price: 0
+                price: 0,
+                file:"",
+                filePath: "",
+                amount:0,
+                from:"",
+                about:"",
+                unit:"",
+                type: "",
+                typeId:0
+            },
+            orderlines:[],
+            orderline:{
+                id:0,
+                product:[],
+                productId:0,
+                amount:0
             }
         },
         created: function () {

@@ -34,7 +34,7 @@ namespace AsianShop.Data
             db.Add(vegetable);
             db.SaveChanges();
             
-            var item = new Product("Salad", 225.222M, "testFilePath", 50, vegetable.id,vegetable,"kg","Spain","Exotic");
+            var item = new Product("Salad", 22.22M, "testFilePath", 50, vegetable.id,vegetable,"kg","Spain","Exotic");
             db.Add(item);
             db.SaveChanges();
             var item2 = new Product("Apples", 12.99M, "TestFilePath2", 30, fruit.id,fruit,"kg","France","Exotic");
@@ -42,6 +42,9 @@ namespace AsianShop.Data
             db.SaveChanges();
             var item3 = new Product("Pizza", 12.99M, "TestFilePath2", 30, hotFood.id,hotFood,"piece","Italy","Exotic");
             db.Add(item3);
+            db.SaveChanges();
+            var item4 = new Product("Pear", 10.99M, "TestFilePath2", 30, fruit.id,fruit,"kg","Portugal","Exotic");
+            db.Add(item4);
             db.SaveChanges();
             
             var orderLine2 = new OrderLine(item2,55);

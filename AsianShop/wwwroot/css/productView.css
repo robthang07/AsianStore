@@ -1,16 +1,25 @@
-.row{
+.row2{
     align-items: center;
 }
 .column {
-    column-gap: 0;
+    float:left;
+    width: 25%;
+    padding: 10px;
 }
-.col{
+
+.columnDetail{
+    width: 50%;
+}
+.ImageRow{
     width: 50%;
 }
 .contain{
     object-fit: fill;
 }
-
+#detailImage{
+    width: 70%;
+    height: auto;
+}
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 300px;
