@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/dashboard.css" />
     <link rel="stylesheet" href="~/css/productView.css" />
+    <link rel="stylesheet" href="~/css/cartView.css" />
+    <link rel="stylesheet" href="~/css/checkout.css" />
 </head>
 <body>
     <header>
@@ -36,6 +38,7 @@
         </nav>
     </header>
     <div class="container">
+        <partial name="ClientView/_CartPartial"/>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -53,8 +56,23 @@
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="~/js/clientToServerController.js"></script>
-    <script src="~/js/dashBoardController.js"></script>
-
-    @RenderSection("Scripts", required: false)
+    <script src="~/js/cartViewController.js" defer></script>
+@{
+    var currentController = (string)ViewContext.RouteData.Values["controller"] ;
+    var currentAction = (string)ViewContext.RouteData.Values["action"] ;
+    if (currentController != null){
+        
+        if (currentAction.Equals("Details")){
+             <script src="~/js/clientViewController.js" defer></script>
+            }
+        if (currentController.Equals("Dashboard")){
+                <script src="~/js/dashboardController.js" defer></script>
+            }
+        if (currentController.Equals("Checkout")){
+            <script src="~/js/checkOutViewController.js" defer></script>
+        }
+    }
+}
+@RenderSection("Scripts", required: false)
 </body>
 </html>

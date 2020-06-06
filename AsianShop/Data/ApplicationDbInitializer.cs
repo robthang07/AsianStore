@@ -34,20 +34,19 @@ namespace AsianShop.Data
             db.Add(vegetable);
             db.SaveChanges();
             
-            var item = new Product("Salad", 22.22M, "testFilePath", 50, vegetable.id,vegetable,"kg","Spain","Exotic");
+            var item = new Product("Salad", 22.22M, "/resources/DatabaseFiles/Vegetables/1.png", 50, vegetable.id,vegetable,"kg","Spain","Exotic");
             db.Add(item);
             db.SaveChanges();
-            var item2 = new Product("Apples", 12.99M, "TestFilePath2", 30, fruit.id,fruit,"kg","France","Exotic");
+            var item2 = new Product("Apples", 12.99M, "/resources/DatabaseFiles/Fruits/2.png", 30, fruit.id,fruit,"kg","France","Exotic");
             db.Add(item2);
             db.SaveChanges();
-            var item3 = new Product("Pizza", 12.99M, "TestFilePath2", 30, hotFood.id,hotFood,"piece","Italy","Exotic");
+            var item3 = new Product("Pizza", 12.99M, "/resources/DatabaseFiles/HotFood/3.png", 30, hotFood.id,hotFood,"pcs","Italy","Exotic");
             db.Add(item3);
             db.SaveChanges();
-            var item4 = new Product("Pear", 10.99M, "TestFilePath2", 30, fruit.id,fruit,"kg","Portugal","Exotic");
+            var item4 = new Product("Pear", 10.99M, "/resources/DatabaseFiles/Fruits/4.png", 30, fruit.id,fruit,"kg","Portugal","Exotic");
             db.Add(item4);
             db.SaveChanges();
             
-            var orderLine2 = new OrderLine(item2,55);
             var orderLine = new OrderLine(item,2);
             db.Add(orderLine);
             db.SaveChanges();

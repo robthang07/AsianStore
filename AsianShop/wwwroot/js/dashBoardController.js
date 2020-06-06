@@ -2,6 +2,7 @@ $(document).ready(function() {
     let clientToServer = new ClientToServerController();
 
     var database = new Vue({
+        
         el: '#database',
         data: {
             products: [],

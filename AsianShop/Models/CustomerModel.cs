@@ -21,7 +21,7 @@ namespace AsianShop.Models
         //Town of Customer, where they live
         public string PostPlace { get; set; }
         
-        
+        public Customer(){}
         public Customer(string email, string firstName, string lastName, string phoneNumber, string postAddress, string postNumber, string postPlace)
         {
             this.Email = email;

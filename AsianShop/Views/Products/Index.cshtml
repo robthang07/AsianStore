@@ -3,7 +3,7 @@
 <div class="row">
    @foreach (var n in Model.Reverse())
    {
-   var picturePath ="Resources/DatabaseFiles/"+n.Type.Name+"/"+ @n.Id+".png";
+      var picturePath = n.FilePath;
       var price = n.Price +" kr/" +n.Unit;
    <div class="column">
          <div class="card">

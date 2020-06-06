@@ -1,4 +1,6 @@
 class ClientToServerController{
+     Url = "https://localhost:5001/api/server/orderLines";
+
     constructor(){}
     
     getCustomers(self){
@@ -14,13 +16,25 @@ class ClientToServerController{
     getOrders(self){
         axios.get('api/server/orders').then(function(response){
             self.orders = response.data;
-        })
+        });
     }
     getTypes(self){
         axios.get('api/server/types').then(function(response){
             self.types = response.data;
-        })
+        });
     }
+    getOrderLine(self){
+        axios.get(this.Url).then(function(response){
+            self.orderLines = response.data;
+        });
+    }
+    getCheckOutOrderLine(self){
+        axios.get('api/server/orderLines').then(function(response){
+            self.orderLines = response.data;
+        });
+    }
+    
+/*****************************Post***************************************/
 
     postProduct(formdata,self){
         axios.post('api/server/products',formdata,
@@ -48,4 +62,39 @@ class ClientToServerController{
         })
     }
     
+    postOrderLine(formdata,self){
+        axios.post(this.Url,formdata,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(function(response){
+            console.log("Order line successfully added");
+            self.orderLines.push(response.data);
+        });
+    }
+    
+    postOrder(formData,self){
+        axios.post('api/server/orders',formData,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(function(response){
+            console.log("Order successfully added");
+            self.orders.push(response.data);
+        });
+    }
+
+    postCustomer(formData,self){
+        axios.post('api/server/customers',formData,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(function(response){
+            console.log("Order successfully added");
+            self.customers.push(response.data);
+        });
+    }    
 }

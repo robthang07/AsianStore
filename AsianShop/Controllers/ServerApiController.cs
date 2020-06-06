@@ -86,8 +86,42 @@ namespace AsianShop.Controllers
 
             return Ok(types);
         }
+        
+        [HttpGet("orderLines")]
+        public IActionResult GetAllOrderLines()
+        {
+            //Get all customer
+            var orderLines = _db.OrderLines;
+            //Check if the customer exists, return 404 if it doesn't
+            if (orderLines == null)
+                return NotFound();
+            foreach (var o in orderLines)
+            {
+                o.Product = _db.Products.Find(o.ProductId);
+            }
+
+            return Ok(orderLines);
+        }
 
         /*******************************Post*******************************/
+        
+        [HttpPost("customers")]
+        public IActionResult PostCustomer([FromForm] Customer customer)
+        {
+            if(customer.Id != 0){       
+                return BadRequest();
+            }
+
+            if (ModelState.IsValid)
+            {
+                _db.Add(customer);
+                _db.SaveChanges();
+
+                return Ok(customer);
+            }
+
+            return BadRequest();
+        }
         [HttpPost("products")]
         public async Task<IActionResult> PostProduct([FromForm] Product product)
         {
@@ -133,6 +167,57 @@ namespace AsianShop.Controllers
                 return Ok(types);
             }
 
+            return BadRequest();
+        }
+        
+        [HttpPost("orderLines")]
+        public async Task<IActionResult> PostOrderLines([FromForm] OrderLine orderLine)
+        {
+            if(orderLine.Id != 0){       
+                return BadRequest();
+            }
+
+            if (ModelState.IsValid)
+            {
+                orderLine.Product = _db.Products.Find(orderLine.ProductId);
+                _db.Add(orderLine);
+                _db.SaveChanges();
+
+                return Ok(orderLine);
+            }
+            return BadRequest();
+        }
+        
+        [HttpPost("orders")]
+        public async Task<IActionResult> PostOrder([FromForm] Order order)
+        {
+            string customerFName = Request.Form["firstName"];
+            string customerLName = Request.Form["lastName"];
+            string customerEmail = Request.Form["email"];
+            string customerPhoneNumber = Request.Form["phoneNumber"];
+            string customerPAddress = Request.Form["postAddress"];
+            string customerPPlace = Request.Form["postPlace"];
+            string customerPNumber = Request.Form["postNumber"];
+
+
+            if (order.Id != 0)
+            {
+                return BadRequest();
+            }
+
+            if (ModelState.IsValid)
+            {
+                if (order.CustomerId.Equals(0))
+                {
+                    Customer customer = new Customer(customerEmail,customerFName,customerLName,customerPhoneNumber, customerPAddress,customerPNumber, customerPPlace);
+                    PostCustomer(customer);
+                    order.Customer = customer;
+                }
+                _db.Add(order);
+                _db.SaveChanges();
+
+                return Ok(order);
+            }
             return BadRequest();
         }
     }

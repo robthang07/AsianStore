@@ -1,0 +1,9 @@
+@model IEnumerable<OrderLine>
+<div id="checkout" v-cloak>
+    <div id="checkoutPartial">
+        <partial name="Checkout/_CheckoutPartial"/>
+    </div>
+    <div id="checkoutGuestPartial" style="display: none">
+        <partial name="Checkout/_CheckoutGuestPartial"/>
+    </div>
+</div>

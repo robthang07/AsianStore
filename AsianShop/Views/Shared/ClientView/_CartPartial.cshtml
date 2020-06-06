@@ -1,0 +1,25 @@
+<div id="cartView" style="display: none;">
+    <table class="table" border="1">
+        <thead>
+        <tr class="table-succes">
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(orderLine, index) in orderLines">
+            <td>{{orderLine.product.name}}</td>
+            <td>{{orderLine.amount}}</td>
+            <td class="Remove">
+                <button class="btn btn-primary">Edit</button>
+            </td>
+            <td>
+                <button class="btn btn-danger" >Delete</button>    
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <button type="button" onclick="location.href='@Url.Action("Index", "Checkout")'">Checkout</button>
+</div>
