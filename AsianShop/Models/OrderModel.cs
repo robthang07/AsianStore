@@ -20,9 +20,11 @@ namespace AsianShop.Models
         private bool Delivered { get; set; }
         public DateTime LastPickUpDate { get; set; }
         #if NETCOREAPP
-        [Column("OrderLines")]
+        [NotMapped]
         #endif
         public List<OrderLine> OrderLines { get; set; }
+
+        public string OrderLinesIds { get; set; }
 
         public Order(){}
         public Order(Customer customer, int customerId, string discount, decimal price, bool delivered)

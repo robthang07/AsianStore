@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AsianShop.Data;
@@ -198,7 +199,8 @@ namespace AsianShop.Controllers
             string customerPAddress = Request.Form["postAddress"];
             string customerPPlace = Request.Form["postPlace"];
             string customerPNumber = Request.Form["postNumber"];
-
+            //string orderLines = Request.Form["orderLineIds"];
+            //var orderLineAsArray = orderLines.Split(",");
 
             if (order.Id != 0)
             {
@@ -213,6 +215,19 @@ namespace AsianShop.Controllers
                     PostCustomer(customer);
                     order.Customer = customer;
                 }
+
+                if (order.OrderLinesIds != "")
+                {                   
+                    var orderLineList = new List<OrderLine>();
+                    var orderLineAsArray = order.OrderLinesIds.Split(",");
+                    foreach (var o in orderLineAsArray)
+                    {
+                        orderLineList.Add(_db.OrderLines.Find(int.Parse(o)));
+                    }
+
+                    order.OrderLines = orderLineList;
+                }
+                
                 _db.Add(order);
                 _db.SaveChanges();
 

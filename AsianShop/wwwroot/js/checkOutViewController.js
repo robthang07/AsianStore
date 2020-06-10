@@ -45,6 +45,7 @@ $(document).ready(function() {
                 totalPrice:0,
                 orderDate:"",
                 orderLines:[],
+                orderLinesIds:"",
                 delivered:false
             },
             orderLines:[],
@@ -82,8 +83,11 @@ $(document).ready(function() {
                 formData.append("postAddress", this.customer.postAddress);
                 formData.append("postPlace", this.customer.postPlace);
                 formData.append("postNumber", this.customer.postNumber);
-                formData.append("orderLines", this.orderLines);
-                formData.append("discount", "japp");
+                let orderLineIds = "";
+                this.orderLines.forEach(x => orderLineIds += x.id + ",");
+                orderLineIds = orderLineIds.substring(0, orderLineIds.length - 1);
+                formData.append("orderLinesIds", orderLineIds);
+
                 clientToServer.postOrder(formData,this);
             }
         }
