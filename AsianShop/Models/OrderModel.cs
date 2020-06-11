@@ -16,9 +16,10 @@ namespace AsianShop.Models
         public int CustomerId { get; set; }
         public string Discount { get; set; }
         public decimal TotalPrice { get; set; }
-        public DateTime OrderDate { get; set; }
+        public DateTime OrderTime { get; set; }
+        public string OrderDate { get; set; }
         private bool Delivered { get; set; }
-        public DateTime LastPickUpDate { get; set; }
+        public string LastPickUpDate { get; set; }
         #if NETCOREAPP
         [NotMapped]
         #endif
@@ -34,9 +35,10 @@ namespace AsianShop.Models
             this.OrderLines = new List<OrderLine>();
             this.Discount = discount;
             this.TotalPrice = price;
-            this.OrderDate = DateTime.Now.Date;
+            this.OrderTime = DateTime.Now.Date;
+            this.OrderDate = DateTime.Now.Date.ToShortDateString();
             this.Delivered = delivered;
-            this.LastPickUpDate = OrderDate.AddDays(7);
+            this.LastPickUpDate = OrderTime.AddDays(7).ToShortDateString();
         }
         
     }

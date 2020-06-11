@@ -22,9 +22,11 @@ namespace AsianShop.Data
             var admin = new ApplicationUser { UserName = "admin@uia.no", Email = "admin@uia.no" };
             um.CreateAsync(admin, "Password1.").Wait();
             um.AddToRoleAsync(admin, "Admin").Wait();
+            admin.EmailConfirmed = true;
 
             var user = new ApplicationUser { UserName = "user@uia.no", Email = "user@uia.no" };
             um.CreateAsync(user, "Password1.").Wait();
+            user.EmailConfirmed = true;
             
             var hotFood = new Type("Hot food");
             db.Add(hotFood);
@@ -53,6 +55,14 @@ namespace AsianShop.Data
             
             var customer = new Customer("test@gmail.com","Jens","Petterson","444444444","testPost","4450","Oslo");
             db.Add(customer);
+            db.SaveChanges();
+            
+            var image = new FrontImage()
+            {
+                Name = "image1",
+                FilePath = "/resources/Images/FrontImages/groceryStore.jpg"
+            };
+            db.Add(image);
             db.SaveChanges();
             
             var order = new Order(customer,customer.Id,"Discount2",item.Price*orderLine.Amount,false);

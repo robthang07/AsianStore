@@ -44,7 +44,16 @@ $(document).ready(function() {
                 totalPrice:0,
                 orderDate:"",
                 orderLines:[],
+                orderLinesIds:"",
+                lastPickUpDate:"",
                 delivered:false
+            },
+            frontImages:[],
+            frontImage:{
+                id:0,
+                name:"",
+                filePath:"",
+                file:""
             }
         },
         created: function () {
@@ -52,6 +61,7 @@ $(document).ready(function() {
             clientToServer.getProducts(this);
             clientToServer.getOrders(this);
             clientToServer.getTypes(this);
+            clientToServer.getFrontImages(this);
         },
         methods: {
             openCustomerViewPartial:function () {
@@ -70,6 +80,11 @@ $(document).ready(function() {
                 $("#types").show();
                 $("#dashboard").hide();
             },
+
+            openFrontImageViewPartial(){
+                $("#frontImages").show();
+                $("#dashboard").hide();
+            },
             
             openAddModal(){
                 if($('#products').is(':visible')){
@@ -77,6 +92,9 @@ $(document).ready(function() {
                 }      
                 else if($('#types').is(':visible')){
                     $('#addTypeModal').modal('show');
+                }
+                else if($('#frontImages').is(':visible')){
+                    $('#addImageModal').modal('show');
                 }
             },
             
@@ -101,6 +119,14 @@ $(document).ready(function() {
                 formData.append('name',this.type.name);
                 clientToServer.postType(formData,this);
             },
+            
+            addImage:function(){
+                let formData = new FormData();
+                formData.append('name',this.type.name);
+                formData.append('file',this.frontImage.file);
+                formData.append('filePath', this.frontImage.filePath);
+                clientToServer.postFrontImage(formData,this);
+            },
 
             /*********************** File *************************/
 
@@ -112,6 +138,9 @@ $(document).ready(function() {
                 else{
                     this.product.file = this.$refs.structureEditFile.files[0];
                 }
+            },
+            uploadImage:function(){
+                this.frontImage.file = this.$refs.file.files[0];
             },
         }
     })

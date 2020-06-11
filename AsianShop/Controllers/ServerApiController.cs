@@ -103,6 +103,20 @@ namespace AsianShop.Controllers
 
             return Ok(orderLines);
         }
+        
+        [HttpGet("frontImages")]
+        public IActionResult GetAllFrontImages()
+        {
+            
+            //Get all customers
+            var images = _db.FrontImages;
+                 
+            //Check if the customers exists, return 404 if it doesn't
+            if (images == null)
+                return NotFound();
+            
+            return Ok(images);
+        }
 
         /*******************************Post*******************************/
         
@@ -232,6 +246,34 @@ namespace AsianShop.Controllers
                 _db.SaveChanges();
 
                 return Ok(order);
+            }
+            return BadRequest();
+        }
+        [HttpPost("frontImages")]
+        public async Task<IActionResult> PostFrontImage([FromForm] FrontImage image)
+        {
+            if (image.Id != 0)
+            {
+                return BadRequest();
+            }
+
+            if (ModelState.IsValid)
+            {
+                if (image.File == null)
+                {
+                    return BadRequest();
+                }
+
+                if (await _pr.StoreImage(image, _db.Products.Count() + 1) == false)
+                {
+                    return BadRequest();
+                }
+
+
+                _db.Add(image);
+                _db.SaveChanges();
+
+                return Ok(image);
             }
             return BadRequest();
         }

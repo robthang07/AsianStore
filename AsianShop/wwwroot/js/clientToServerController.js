@@ -33,6 +33,12 @@ class ClientToServerController{
             self.orderLines = response.data;
         });
     }
+
+    getFrontImages(self){
+        axios.get('api/server/frontImages').then(function(response){
+            self.frontImages = response.data;
+        });
+    }
     
 /*****************************Post***************************************/
 
@@ -96,5 +102,23 @@ class ClientToServerController{
             console.log("Order successfully added");
             self.customers.push(response.data);
         });
-    }    
+    }
+
+    postFrontImage(formdata,self){
+        axios.post('api/server/frontImages',formdata,
+            {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(function(response){
+            self.frontImages.push(response.data);
+            $('#addImageModal').modal('hide');
+        })
+    }
+
+    deleteFrontImage(self,id,index){
+        axios.delete('api/server/frontImages/'+id).then(function(){
+            self.frontImages.splice(index,1);
+        });
+    }
 }

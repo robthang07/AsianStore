@@ -34,6 +34,7 @@ namespace AsianShop.Data
         public DbSet<Type> Types { get; set; }
         
         public DbSet<OrderLine> OrderLines { get; set; }
+        public DbSet<FrontImage> FrontImages { get; set; }
       
     }
 }

@@ -1,3 +1,4 @@
+using System.Security.Principal;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsianShop.Controllers
@@ -7,8 +8,15 @@ namespace AsianShop.Controllers
         // GET
         public IActionResult Index()
         {
-            return
-            View();
+            if (User.IsInRole("Admin"))
+            {
+                return
+                    View();
+            }
+            
+            return new ForbidResult();
+
         }
+        
     }
 }

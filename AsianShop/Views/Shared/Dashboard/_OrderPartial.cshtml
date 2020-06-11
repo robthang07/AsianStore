@@ -10,7 +10,9 @@
                     <th>Customer's name</th>
                     <th>Discount</th>
                     <th>Total price</th>
+                    <th>Order lines ids</th>
                     <th>Order date</th>
+                    <th>Last pickup date</th>
                     <th>Delete</th>
                     <th>Edit</th>
                 </tr>
@@ -21,7 +23,9 @@
                     <td>{{order.customer.lastName}}, {{order.customer.firstName}}</td>
                     <td>{{order.discount}}</td>
                     <td>{{order.totalPrice}}</td>
+                    <td>{{order.orderLinesIds}}</td>
                     <td>{{order.orderDate}}</td>
+                     <td>{{order.lastPickUpDate}}</td>
                     <td class="Remove">
                         <button class="btn btn-danger" >Delete</button>
                     </td>
