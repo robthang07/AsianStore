@@ -18,7 +18,7 @@
                     <td>{{image.name}}</td>
                     <td>{{image.filePath}}</td>
                     <td class="Remove">
-                        <button class="btn btn-danger" >Delete</button>
+                        <button class="btn btn-danger" v-on:click="deleteFrontImage(image.id,index)">Delete</button>
                     </td>
                 </tr>
             </tbody>

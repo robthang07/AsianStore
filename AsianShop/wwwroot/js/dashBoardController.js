@@ -97,7 +97,7 @@ $(document).ready(function() {
                     $('#addImageModal').modal('show');
                 }
             },
-            
+            /*****************************Add************************/
             addProduct:function(){
                 this.product.typeId = this.product.type.id;
                 let formData = new FormData();
@@ -126,6 +126,12 @@ $(document).ready(function() {
                 formData.append('file',this.frontImage.file);
                 formData.append('filePath', this.frontImage.filePath);
                 clientToServer.postFrontImage(formData,this);
+            },
+            
+            /*****************************Delete************************/
+            
+            deleteFrontImage:function(id, index){
+                clientToServer.deleteFrontImage(this,id,index);
             },
 
             /*********************** File *************************/

@@ -277,5 +277,28 @@ namespace AsianShop.Controllers
             }
             return BadRequest();
         }
+        [HttpDelete("frontImages/{id}")]
+        public async Task<IActionResult> DeleteFrontImage(int id)
+        {
+            //Search for the given roof
+            var image = _db.FrontImages.Find(id);
+                 
+            //Check if the roof exists, return 404 if it doesn't
+            if (image == null)
+                return NotFound();
+     
+            //Delete the file from directory, return bad request if filepath is empty
+            if (await _pr.DeleteFile(image.FilePath) == false)
+            {
+                return BadRequest();
+            }
+            
+            //Remove roof from the database
+            _db.Remove(image);
+            _db.SaveChanges();
+                 
+            //return 200 Ok with the roof
+            return Ok(image);
+        }
     }
 }

@@ -1,22 +1,15 @@
 using System.Security.Principal;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AsianShop.Controllers
 {
     public class DashboardController : Controller
     {
-        // GET
+        [Authorize(Roles="Admin")]
         public IActionResult Index()
         {
-            if (User.IsInRole("Admin"))
-            {
-                return
-                    View();
-            }
-            
-            return new ForbidResult();
-
+                return View();
         }
-        
     }
 }

@@ -4,10 +4,6 @@ namespace AsianShop.Models
 {
     public class ApplicationUser:IdentityUser
     {
-        public string DeliveryPostAddress { get; set; }
-        public string DeliveryPostNumber { get; set; }
-        //Town of Customer to be delivered to
-        public string DeliveryPostPlace { get; set; }
         //Email of Customer
         //TODO should this be used as ID or generated from dotnet?
         public string Email { get; set; }
