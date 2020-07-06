@@ -12,12 +12,16 @@
     position: relative;
     width: 50%;
 }
-
-.imageDiv{
-    width: 30%;
-    height: 30%;
-
+.row {
+    display: flex; 
 }
+
+.column {
+    width: 30%;
+    margin: 0.2%;
+    flex: 1;
+}
+
 
 .middle {
     transition: .5s ease;

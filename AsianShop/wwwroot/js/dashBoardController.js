@@ -65,25 +65,30 @@ $(document).ready(function() {
         },
         methods: {
             openCustomerViewPartial:function () {
+                $("#resetButton").show();
                 $("#customers").show();
                 $("#dashboard").hide();
             },
             openProductViewPartial:function () {
                 $("#products").show();
                 $("#dashboard").hide();
+                $("#resetButton").show();
             },
             openOrderViewPartial:function () {
                 $("#orders").show();
                 $("#dashboard").hide();
+                $("#resetButton").show();
             },
             openTypeViewPartial() {
                 $("#types").show();
                 $("#dashboard").hide();
+                $("#resetButton").show();
             },
 
             openFrontImageViewPartial(){
                 $("#frontImages").show();
                 $("#dashboard").hide();
+                $("#resetButton").show();
             },
             
             openAddModal(){
@@ -147,6 +152,16 @@ $(document).ready(function() {
             },
             uploadImage:function(){
                 this.frontImage.file = this.$refs.file.files[0];
+            },
+
+            backToDashboard:function () {
+                $("#dashboard").show();
+                $("#customers").hide();
+                $("#products").hide();
+                $("#orders").hide();
+                $("#types").hide();
+                $("#frontImages").hide();
+                $("#resetButton").hide();
             },
         }
     })
