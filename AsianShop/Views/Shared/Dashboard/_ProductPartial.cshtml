@@ -31,7 +31,7 @@
                <td>{{product.amount}}</td>
                <td>{{product.filePath}}</td>
                <td class="Remove">
-                  <button class="btn btn-danger">Delete</button>
+                  <button class="btn btn-danger" v-on:click="deleteProduct(product.id,index)">Delete</button>
                </td>
                <td>
                   <button class="btn btn-primary" >Edit</button>

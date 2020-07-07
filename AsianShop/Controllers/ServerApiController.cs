@@ -277,13 +277,14 @@ namespace AsianShop.Controllers
             }
             return BadRequest();
         }
+        /*******************************Delete*******************************/
         [HttpDelete("frontImages/{id}")]
         public async Task<IActionResult> DeleteFrontImage(int id)
         {
-            //Search for the given roof
+            //Search for the given image
             var image = _db.FrontImages.Find(id);
                  
-            //Check if the roof exists, return 404 if it doesn't
+            //Check if the image exists, return 404 if it doesn't
             if (image == null)
                 return NotFound();
      
@@ -293,12 +294,63 @@ namespace AsianShop.Controllers
                 return BadRequest();
             }
             
-            //Remove roof from the database
+            //Remove image from the database
             _db.Remove(image);
             _db.SaveChanges();
                  
-            //return 200 Ok with the roof
+            //return 200 Ok with the image
             return Ok(image);
+        }
+
+        [HttpDelete("customers/{id}")]
+        public async Task<ActionResult> DeleteCustomer(int id)
+        {
+            var customer = _db.Customers.Find(id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            _db.Remove(customer);
+            _db.SaveChanges();
+            
+            return Ok(customer);
+        }
+        
+        [HttpDelete("products/{id}")]
+        public async Task<ActionResult> DeleteProduct(int id)
+        {
+            var product = _db.Products.Find(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            
+            //Delete the file from directory, return bad request if filepath is empty
+            if (await _pr.DeleteFile(product.FilePath) == false)
+            {
+                return BadRequest();
+            }
+
+            _db.Remove(product);
+            _db.SaveChanges();
+            
+            return Ok(product);
+        }
+        
+        [HttpDelete("orders/{id}")]
+        public async Task<ActionResult> DeleteOrder(int id)
+        {
+            var order = _db.Orders.Find(id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            _db.Remove(order);
+            _db.SaveChanges();
+            
+            return Ok(order);
         }
     }
 }

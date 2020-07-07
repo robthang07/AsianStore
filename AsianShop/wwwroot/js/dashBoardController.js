@@ -138,6 +138,15 @@ $(document).ready(function() {
             deleteFrontImage:function(id, index){
                 clientToServer.deleteFrontImage(this,id,index);
             },
+            deleteCustomer:function(id,index){
+              clientToServer.deleteCustomer(this,id,index);  
+            },
+            deleteProduct:function(id,index){
+                clientToServer.deleteProduct(this,id,index);
+            },
+            deleteOrder:function(id,index){
+                clientToServer.deleteOrder(this,id,index);
+            },
 
             /*********************** File *************************/
 

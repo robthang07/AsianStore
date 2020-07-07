@@ -29,7 +29,7 @@
                     <td> {{ customer.postPlace }} </td>
                     <td> {{ customer.postAddress }} </td>
                     <td class="Remove">
-                        <button class="btn btn-danger" >Delete</button>
+                        <button class="btn btn-danger" v-on:click="deleteCustomer(customer.id,index)">Delete</button>
                     </td>
                     <td>
                         <button class="btn btn-primary" >Edit</button>

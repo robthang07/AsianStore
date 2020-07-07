@@ -115,10 +115,25 @@ class ClientToServerController{
             $('#addImageModal').modal('hide');
         })
     }
-
+    /*****************************Delete***************************************/
     deleteFrontImage(self,id,index){
         axios.delete('api/server/frontImages/'+id).then(function(){
             self.frontImages.splice(index,1);
+        });
+    }
+    deleteCustomer(self,id,index){
+        axios.delete('api/server/customers/'+id).then(function(){
+            self.customers.splice(index,1);
+        });
+    }
+    deleteProduct(self,id,index){
+        axios.delete('api/server/products/'+id).then(function(){
+            self.products.splice(index,1);
+        });
+    }
+    deleteOrder(self,id,index){
+        axios.delete('api/server/orders/'+id).then(function(){
+            self.orders.splice(index,1);
         });
     }
 }
