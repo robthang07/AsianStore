@@ -352,5 +352,20 @@ namespace AsianShop.Controllers
             
             return Ok(order);
         }
+        
+        /*******************************Edit*******************************/
+        [HttpPut("types/{id}")]
+        public IActionResult PutType(Type type)
+        {
+            if (!_db.Types.Any(p => p.id == type.id))
+            {
+                return NotFound();
+            }
+
+            _db.Update(type);
+            _db.SaveChanges();
+            
+            return Ok(type);
+        }
     }
 }

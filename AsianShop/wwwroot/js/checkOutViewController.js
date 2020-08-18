@@ -62,6 +62,13 @@ $(document).ready(function() {
             clientToServer.getCheckOutOrderLine(this);
         },
         methods: {
+            test2:function(){
+                alert(this.orderLines.length);
+                for (let i = 0; i < this.orderLines.length; i++) {
+                    alert("dfasdf");
+                    this.totalPrice += this.orderLines[i].price * this.orderLines[i].amount;
+                }
+            },
             openGuestCheckOut:function(){
                 $("#checkoutGuestPartial").show();
                 $("#checkoutPartial").hide();

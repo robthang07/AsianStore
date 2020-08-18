@@ -10,18 +10,13 @@
 
 .container2 {
     position: relative;
-    width: 50%;
+    width: 30%;
+    margin: 0.2%;
+    align-content: center;
 }
 .row {
     display: flex; 
 }
-
-.column {
-    width: 30%;
-    margin: 0.2%;
-    flex: 1;
-}
-
 
 .middle {
     transition: .5s ease;

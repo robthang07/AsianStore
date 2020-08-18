@@ -74,4 +74,13 @@ body {
   background: #d0b962;
   color: white; 
 }
+.customYellowButton{
+  background: #d0b962;
+}
+.customGreenButton{
+  background-color: #064403;
+}
+.startPic{
+  width:100%;
+}
 [v-cloak] { display: block; }

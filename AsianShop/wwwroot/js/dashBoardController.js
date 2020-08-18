@@ -102,6 +102,13 @@ $(document).ready(function() {
                     $('#addImageModal').modal('show');
                 }
             },
+            openEditModal:function(type){
+                if($('#types').is(':visible')){
+                    this.type.id = type.id;
+                    this.type.name = type.name;
+                    $('#editTypeModal').modal('show');
+                }
+            },
             /*****************************Add************************/
             addProduct:function(){
                 this.product.typeId = this.product.type.id;
@@ -146,6 +153,13 @@ $(document).ready(function() {
             },
             deleteOrder:function(id,index){
                 clientToServer.deleteOrder(this,id,index);
+            },
+
+            /*********************** Edit *************************/
+            editType:function(){
+                let id =  $('#typeId').html();
+                this.type.name = $('#typeName').html();
+                clientToServer.editType(this,id);
             },
 
             /*********************** File *************************/

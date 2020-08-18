@@ -136,4 +136,15 @@ class ClientToServerController{
             self.orders.splice(index,1);
         });
     }
+    /*****************************Edit***************************************/
+    editType(self,id){
+        axios.put('api/server/types/'+id, self.type).then(function(response){
+                let index = self.types.findIndex(s => s.id ==  response.data.id);
+                self.types[index] = response.data;
+
+                self.types.push(response.data);
+                self.types.pop();
+                $('#editTypeModal').modal('hide');
+        })
+    }
 }
