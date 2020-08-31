@@ -1,11 +1,20 @@
 $(document).ready(function() {
     let clientToServer = new ClientToServerController();
-
+    var items = localStorage.getItem("items");
+    var itemsObj = JSON.parse(items);
+    
     var checkout = new Vue({
-
         el: '#checkout',
         data: {
             totalPrice: 0,
+            items:[],
+            item:{
+                id: 0,
+                name: "",
+                price:0,
+                amount:0,
+                filePath:""
+            },
             products: [],
             product: {
                 id: 0,
@@ -57,32 +66,28 @@ $(document).ready(function() {
             }
         },
         created: function () {
+            this.getTotalPrice();
             clientToServer.getProducts(this);
             clientToServer.getTypes(this);
-            clientToServer.getCheckOutOrderLine(this);
+            clientToServer.getOrderLine(this);
+        },
+        mounted(){
+            $("#navbarDropdownMenuLink").on('click', function (e) {
+               alert("dfasfasdf");
+                e.stopPropagation();
+              });
         },
         methods: {
-            test2:function(){
-                alert(this.orderLines.length);
-                for (let i = 0; i < this.orderLines.length; i++) {
-                    alert("dfasdf");
-                    this.totalPrice += this.orderLines[i].price * this.orderLines[i].amount;
-                }
-            },
+            //Open the guest checkout
             openGuestCheckOut:function(){
                 $("#checkoutGuestPartial").show();
                 $("#checkoutPartial").hide();
             },
-            checkoutGuest:function(){
+             async checkoutGuest(){
+                await this.createOrderLine();
+                clientToServer.getOrderLine(this);
                 let formData = new FormData();
-                /*
-                this.order.customer.firstName = this.customer.firstName;
-                this.order.customer.lastName = this.customer.lastName;
-                this.order.customer.email = this.customer.email;
-                this.order.customer.postAddress = this.customer.postAddress;
-                this.order.customer.phoneNumber = this.customer.phoneNumber;
-                this.order.customer.postPlace = this.customer.postPlace;
-                this.order.customer.postNumber = this.customer.postNumber;*/
+            
                 formData.append("firstName",this.customer.firstName);
                 formData.append("lastName", this.customer.lastName);
                 formData.append("email", this.customer.email);
@@ -90,13 +95,49 @@ $(document).ready(function() {
                 formData.append("postAddress", this.customer.postAddress);
                 formData.append("postPlace", this.customer.postPlace);
                 formData.append("postNumber", this.customer.postNumber);
+                formData.append("totalPrice", this.totalPrice);
                 let orderLineIds = "";
-                this.orderLines.forEach(x => orderLineIds += x.id + ",");
+                this.orderLines.forEach(x => orderLineIds+= x.id + ",");
+
                 orderLineIds = orderLineIds.substring(0, orderLineIds.length - 1);
                 formData.append("orderLinesIds", orderLineIds);
-
                 clientToServer.postOrder(formData,this);
+            },
+            async createOrderLine(){
+                let formData = new FormData();
+                
+                for(i = 0;i < this.items.length; i++){
+                    if(!formData.has("productId")){
+                    formData.append("productId", this.items[i].id);
+                    formData.append("amount", this.items[i].amount);
+                    await clientToServer.postOrderLine(formData,this);
+                    }
+                    else{
+                    //Have to remove all the old values so the formdata wont get same values
+                    formData.delete("productId");
+                    formData.delete("amount");
+
+                    formData.append("productId", this.items[i].id);
+                    formData.append("amount", this.items[i].amount);
+                    await clientToServer.postOrderLine(formData,this);
+                    }
+                }   
+         
+            },
+           
+            getTotalPrice: function(){
+                let totPrice = 0;
+                this.items = itemsObj;
+                //Iterate through the items array and getting the total price
+                for(i = 0;i < itemsObj.length; i++){
+                    var price =  (itemsObj[i].price).replace(",",".");
+                    var amount = parseFloat(itemsObj[i].amount);
+                    var floatPrice = parseFloat(price);
+                     totPrice+= floatPrice*amount;
+                }
+                this.totalPrice = totPrice.toFixed(2);
             }
+
         }
     })
 });

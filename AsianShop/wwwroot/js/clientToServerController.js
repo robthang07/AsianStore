@@ -24,16 +24,10 @@ class ClientToServerController{
         });
     }
     getOrderLine(self){
-        axios.get(this.Url).then(function(response){
-            self.orderLines = response.data;
-        });
-    }
-    getCheckOutOrderLine(self){
         axios.get('api/server/orderLines').then(function(response){
             self.orderLines = response.data;
         });
     }
-
     getFrontImages(self){
         axios.get('api/server/frontImages').then(function(response){
             self.frontImages = response.data;
@@ -68,16 +62,14 @@ class ClientToServerController{
         })
     }
     
-    postOrderLine(formdata,self){
-        axios.post(this.Url,formdata,
+     async postOrderLine(formdata,self){
+       let response = await axios.post('api/server/orderLines',formdata,
             {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
-            }).then(function(response){
-            console.log("Order line successfully added");
-            self.orderLines.push(response.data);
-        });
+            })
+       self.orderLines.push(response.data);     
     }
     
     postOrder(formData,self){

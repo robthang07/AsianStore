@@ -213,6 +213,7 @@ namespace AsianShop.Controllers
             string customerPAddress = Request.Form["postAddress"];
             string customerPPlace = Request.Form["postPlace"];
             string customerPNumber = Request.Form["postNumber"];
+            //decimal totalPrice = decimal.Parse(Request.Form["test"]);
             //string orderLines = Request.Form["orderLineIds"];
             //var orderLineAsArray = orderLines.Split(",");
 

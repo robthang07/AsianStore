@@ -15,7 +15,8 @@ namespace AsianShop.Models
         public Customer Customer { get; set; }
         public int CustomerId { get; set; }
         public string Discount { get; set; }
-        public decimal TotalPrice { get; set; }
+        //has to be string because of the formdata when API requsts are made
+        public string TotalPrice { get; set; }
         public DateTime OrderTime { get; set; }
         public string OrderDate { get; set; }
         private bool Delivered { get; set; }
@@ -27,8 +28,12 @@ namespace AsianShop.Models
 
         public string OrderLinesIds { get; set; }
 
-        public Order(){}
-        public Order(Customer customer, int customerId, string discount, decimal price, bool delivered)
+        public Order(){
+            this.OrderTime = DateTime.Now.Date;
+            this.OrderDate = DateTime.Now.Date.ToShortDateString();
+            this.LastPickUpDate = OrderTime.AddDays(7).ToShortDateString();
+        }
+        public Order(Customer customer, int customerId, string discount, string price, bool delivered)
         {
             this.Customer = customer;
             this.CustomerId = customerId;

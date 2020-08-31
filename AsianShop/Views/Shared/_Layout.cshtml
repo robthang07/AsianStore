@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/dashboard.css" />
     <link rel="stylesheet" href="~/css/productView.css" />
-    <link rel="stylesheet" href="~/css/cartView.css" />
     <link rel="stylesheet" href="~/css/checkout.css" />
 </head>
 <body>
@@ -43,39 +42,11 @@
         </div>
     </nav>
 </header>
-@{
-    var currentController2 = (string) ViewContext.RouteData.Values["controller"];
-    if (currentController2 != null)
-    {
-        if (currentController2.Equals("Home"))
-        {
-            <div>
-                <partial name="ClientView/_CartPartial"/>
-                <main role="main" class="pb-3">
-                    @RenderBody()
-                </main>
-            </div>
-        }
-        else
-        {
-            <div class="container">
-                <partial name="ClientView/_CartPartial"/>
-                <main role="main" class="pb-3">
-                    @RenderBody()
-                </main>
-            </div>
-        }
-    }
-    else
-    {
-        <div class="container">
-            <partial name="ClientView/_CartPartial"/>
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div> 
-    }
-}
+ <div class="container" id="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
     
 
 <footer class="border-top footer text-muted">
@@ -89,7 +60,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="~/js/clientToServerController.js"></script>
+    <script src="~/js/clientToServerController.js" defer></script>
     <script src="~/js/cartViewController.js" defer></script>
 @{
     var currentController = (string)ViewContext.RouteData.Values["controller"] ;

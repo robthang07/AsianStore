@@ -1,35 +1,44 @@
 $(document).ready(function() {
-    let clientToServer = new ClientToServerController();
+    //Get the items from local storrage and parse them as objects
+    var items = localStorage.getItem("items");
+    var itemsObj = JSON.parse(items);    
+    
     var cartView = new Vue({
         el: '#cartView',
         data: {
             totalPrice:0,
-            orderLines:[],
-            orderLine:{
-                id:0,
-                product:[],
-                productId:0,
-                amount:0
+            items:[],
+            item:{
+                id: 0,
+                name: "",
+                price:0,
+                amount:0,
+                filePath:""
+            }
             },
-        },
-        created: function () {
-            clientToServer.getOrderLine(this);
-        },
-        mounted(){
-
-        $("#cartButton").click(function(){
-            clientToServer.getOrderLine(this);
-            let name = "cartView";
-            var x = document.getElementById(name);
-            if (x.style.display === "none") {
-                x.style.display = "block";
+            created:function(){
+                this.items = itemsObj;
+                this.getTotalPrice();
+            },
+            methods:{
+               deleteItem(index){
+                   //Splice with the given index and set them back into local storrage
+                    this.items.splice(index,1);
+                    localStorage.setItem("items",JSON.stringify(this.items))
+               },
+               getTotalPrice(){
+                   var totPrice = 0;
+                   //Iterate through the items array and getting the total price
+                for(i = 0;i < itemsObj.length; i++){
+                    var price =  (itemsObj[i].price).replace(",",".");
+                    var amount = parseFloat(itemsObj[i].amount);
+                    var floatPrice = parseFloat(price);
+                    totPrice += floatPrice*amount.toFixed(0);
+                }
+                this.totalPrice = totPrice.toFixed(2);
+               }
             }
-            //If setting is visible
-            else {
-                x.style.display = "none";
-            }
-        });
-        }
+        
+        
     });
-    
 });
