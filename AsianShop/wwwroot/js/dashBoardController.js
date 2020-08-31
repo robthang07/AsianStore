@@ -130,6 +130,7 @@ $(document).ready(function() {
                 let formData = new FormData();
                 formData.append('name',this.type.name);
                 clientToServer.postType(formData,this);
+                console.log("Hei");
             },
             
             addImage:function(){

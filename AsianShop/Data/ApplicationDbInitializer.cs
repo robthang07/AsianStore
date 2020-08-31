@@ -49,9 +49,10 @@ namespace AsianShop.Data
             db.Add(item4);
             db.SaveChanges();
             
+            /*
             var orderLine = new OrderLine(item,2);
             db.Add(orderLine);
-            db.SaveChanges();
+            db.SaveChanges();*/
             
             var customer = new Customer("test@gmail.com","Jens","Petterson","444444444","testPost","4450","Oslo");
             db.Add(customer);
@@ -65,11 +66,12 @@ namespace AsianShop.Data
             db.Add(image);
             db.SaveChanges();
             
-            var order = new Order(customer,customer.Id,"Discount2",item.Price*orderLine.Amount,false);
+            /*
+            var order = new Order(customer,customer.Id,"Discount2","3232",false);
             //order.OrderLines.Add(orderLine);
             //order.OrderLines.Add(orderLine2);
             db.Add(order);
-            db.SaveChanges();
+            db.SaveChanges();*/
             
             // Finally save changes to the database
             db.SaveChanges();

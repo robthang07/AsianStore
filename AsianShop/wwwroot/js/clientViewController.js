@@ -33,6 +33,7 @@ $(document).ready(function() {
                         id : document.getElementById("addCart").value,
                         name : document.getElementById("name").value,
                         price : document.getElementById("price").value,
+                        filePath: document.getElementById("filePath").value,
                         amount : this.orderLine.amount
                     }
 
@@ -42,36 +43,13 @@ $(document).ready(function() {
                     }
                     else{
                         for (const obj in oldItems) {
-                            //console.log(oldItems[obj]);
                             itemList.push(oldItems[obj]);
                         }
 
-                        //itemList.push(oldItems);
                         itemList.push(item);
                     }
                     localStorage.setItem("items", JSON.stringify(itemList));
                 }
-                
-                function flatten(arr) {
-                    const result = []
-                  
-                    arr.forEach((i) => {
-                      if (Array.isArray(i)) {
-                        result.push(...flatten(i))
-                      } else {
-                        result.push(i)
-                      }
-                    })
-                    
-                    return result
-                  }
-                /*
-                var productId = document.getElementById("addCart").value;
-                this.orderLine.productId = productId;
-                let formData = new FormData();
-                formData.append('productId', this.orderLine.productId);
-                formData.append('amount', this.orderLine.amount);
-                clientToServer.postOrderLine(formData, this);*/
             }
         },
         checkProductAmount:function () {
