@@ -3,6 +3,10 @@ $(document).ready(function() {
     var items = localStorage.getItem("items");
     var itemsObj = JSON.parse(items);    
     
+    $(".dropdown-menu").click(function(e){
+        e.stopPropagation();
+    });
+
     var cartView = new Vue({
         el: '#cartView',
         data: {
@@ -38,7 +42,5 @@ $(document).ready(function() {
                 this.totalPrice = totPrice.toFixed(2);
                }
             }
-        
-        
     });
 });
