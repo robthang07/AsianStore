@@ -7,13 +7,6 @@ $(document).ready(function() {
         e.stopPropagation();
     });
 
-    $(function() {
-        $( 'ul.navbar-nav li' ).on( 'click', function() {
-              $( this ).parent().find( 'li.active' ).removeClass( 'active' );
-              $( this ).addClass( 'active' );
-        });
-  });
-
     var cartView = new Vue({
         el: '#cartView',
         data: {
