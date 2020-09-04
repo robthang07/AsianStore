@@ -15,7 +15,7 @@
                <td>{{item.price}}</td>
                <td>{{item.amount}}</td>
                <td>
-                  <button class="btn btn-danger" v-on:click="deleteItem(index)">Delete</button>
+                  <button class="btn btn-danger" v-on:click="deleteItem(index)">X</button>
                </td>
             </tr>
          </tbody>
@@ -27,6 +27,6 @@
               {{totalPrice}} kr
             </span>
       </div>
-      <button class="btn btn-primary btn-purchase" type="button" onclick="location.href='@Url.Action("Index", "Checkout")'">PURCHASE</button>
+      <button class="btn btn-primary customGreenButton" type="button" onclick="location.href='@Url.Action("Index", "Checkout")'">PURCHASE</button>
    </div>
 </div>

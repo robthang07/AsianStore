@@ -3,6 +3,17 @@ $(document).ready(function() {
     var items = localStorage.getItem("items");
     var itemsObj = JSON.parse(items);    
     
+    $(".dropdown-menu").click(function(e){
+        e.stopPropagation();
+    });
+
+    $(function() {
+        $( 'ul.navbar-nav li' ).on( 'click', function() {
+              $( this ).parent().find( 'li.active' ).removeClass( 'active' );
+              $( this ).addClass( 'active' );
+        });
+  });
+
     var cartView = new Vue({
         el: '#cartView',
         data: {
@@ -38,7 +49,5 @@ $(document).ready(function() {
                 this.totalPrice = totPrice.toFixed(2);
                }
             }
-        
-        
     });
 });
