@@ -5,7 +5,8 @@ using AsianShop.Data;
 using AsianShop.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 namespace AsianShop.Controllers
 {
     [ApiController]
@@ -70,6 +71,15 @@ namespace AsianShop.Controllers
             foreach (var order in orders)
             {
                 order.Customer = _db.Customers.Find(order.CustomerId);
+                var oIds = order.OrderLinesIds.Split(",");
+                var orderLines = new List<OrderLine>();
+                foreach(var i in oIds)
+                {
+                    int id = int.Parse(i);
+                    var orderLine = getOrderLine(id);
+                    orderLines.Add(orderLine);
+                }
+                order.OrderLines = orderLines;
             }
 
             return Ok(orders);
@@ -91,9 +101,8 @@ namespace AsianShop.Controllers
         [HttpGet("orderLines")]
         public IActionResult GetAllOrderLines()
         {
-            //Get all customer
             var orderLines = _db.OrderLines;
-            //Check if the customer exists, return 404 if it doesn't
+
             if (orderLines == null)
                 return NotFound();
             foreach (var o in orderLines)
@@ -102,6 +111,14 @@ namespace AsianShop.Controllers
             }
 
             return Ok(orderLines);
+        }
+
+        public OrderLine getOrderLine(int id)
+        {
+            var orderLine = _db.OrderLines.Find(id);
+            orderLine.Product = _db.Products.Find(orderLine.ProductId);
+
+            return orderLine;
         }
         
         [HttpGet("frontImages")]
@@ -186,7 +203,7 @@ namespace AsianShop.Controllers
         }
         
         [HttpPost("orderLines")]
-        public async Task<IActionResult> PostOrderLines([FromForm] OrderLine orderLine)
+        public IActionResult PostOrderLines([FromForm] OrderLine orderLine)
         {
             if(orderLine.Id != 0){       
                 return BadRequest();
@@ -194,7 +211,7 @@ namespace AsianShop.Controllers
 
             if (ModelState.IsValid)
             {
-                orderLine.Product = _db.Products.Find(orderLine.ProductId);
+                //orderLine.Product = _db.Products.Find(orderLine.ProductId);
                 _db.Add(orderLine);
                 _db.SaveChanges();
 
@@ -204,7 +221,7 @@ namespace AsianShop.Controllers
         }
         
         [HttpPost("orders")]
-        public async Task<IActionResult> PostOrder([FromForm] Order order)
+        public IActionResult PostOrder([FromForm] Order order)
         {
             string customerFName = Request.Form["firstName"];
             string customerLName = Request.Form["lastName"];
@@ -213,6 +230,7 @@ namespace AsianShop.Controllers
             string customerPAddress = Request.Form["postAddress"];
             string customerPPlace = Request.Form["postPlace"];
             string customerPNumber = Request.Form["postNumber"];
+            string orderLines = Request.Form["orderLines"];
             //decimal totalPrice = decimal.Parse(Request.Form["test"]);
             //string orderLines = Request.Form["orderLineIds"];
             //var orderLineAsArray = orderLines.Split(",");
@@ -230,19 +248,24 @@ namespace AsianShop.Controllers
                     PostCustomer(customer);
                     order.Customer = customer;
                 }
-
-                if (order.OrderLinesIds != "")
-                {                   
-                    var orderLineList = new List<OrderLine>();
-                    var orderLineAsArray = order.OrderLinesIds.Split(",");
-                    foreach (var o in orderLineAsArray)
-                    {
-                        orderLineList.Add(_db.OrderLines.Find(int.Parse(o)));
+                if(orderLines != "")
+                {
+                    var oLines= JsonConvert.DeserializeObject<dynamic>(orderLines);
+                    var oLineList = new List<OrderLine>();
+                    var oLineIdList = new List<int>();
+                    foreach(var i in oLines){
+                        var productId = (int)i.productId;
+                        var amount = (int)i.amount;
+                        var product = _db.Products.Find(productId);
+                        OrderLine orderLine = new OrderLine(product,amount);
+                        PostOrderLines(orderLine);
+                        oLineList.Add(orderLine);
+                        oLineIdList.Add(orderLine.Id);
                     }
-
-                    order.OrderLines = orderLineList;
+                    order.OrderLinesIds = string.Join(",",oLineIdList);
+                    order.OrderLines = oLineList;
                 }
-                
+
                 _db.Add(order);
                 _db.SaveChanges();
 
@@ -340,18 +363,38 @@ namespace AsianShop.Controllers
         }
         
         [HttpDelete("orders/{id}")]
-        public async Task<ActionResult> DeleteOrder(int id)
+        public ActionResult DeleteOrder(int id)
         {
             var order = _db.Orders.Find(id);
             if (order == null)
             {
                 return NotFound();
             }
+            DeleteOrderLines(order.OrderLinesIds);
 
             _db.Remove(order);
             _db.SaveChanges();
             
             return Ok(order);
+        }
+
+        public ActionResult DeleteOrderLines(string ids)
+        {
+            var idsList = ids.Split(",");
+            OrderLine orderL;
+            foreach(var i in idsList)
+            {
+                int id = int.Parse(i);
+                orderL = _db.OrderLines.Find(id);
+                if(orderL == null)
+                {
+                    return NotFound();
+                }
+                _db.Remove(orderL);
+                _db.SaveChanges();   
+            }
+
+            return Ok();
         }
         
         /*******************************Edit*******************************/
