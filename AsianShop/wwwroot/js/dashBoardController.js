@@ -109,6 +109,10 @@ $(document).ready(function() {
                     $('#editTypeModal').modal('show');
                 }
             },
+            openOrderLines(index){
+                this.order = this.orders[index];
+                $('#orderLinesModal').modal('show');
+            },
             /*****************************Add************************/
             addProduct:function(){
                 this.product.typeId = this.product.type.id;

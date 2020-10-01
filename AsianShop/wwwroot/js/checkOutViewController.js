@@ -84,8 +84,7 @@ $(document).ready(function() {
                 $("#checkoutPartial").hide();
             },
              async checkoutGuest(){
-                await this.createOrderLine();
-                clientToServer.getOrderLine(this);
+               
                 let formData = new FormData();
             
                 formData.append("firstName",this.customer.firstName);
@@ -96,11 +95,17 @@ $(document).ready(function() {
                 formData.append("postPlace", this.customer.postPlace);
                 formData.append("postNumber", this.customer.postNumber);
                 formData.append("totalPrice", this.totalPrice);
-                let orderLineIds = "";
-                this.orderLines.forEach(x => orderLineIds+= x.id + ",");
+                let orderLines = [];
+                for(i = 0;i < this.items.length; i++){
+                    item = {
+                        productId: this.items[i].id,
+                        amount: this.items[i].amount
+                    }
+                    orderLines.push(item);
+                }
+                var orderLinesJSON = JSON.stringify(orderLines);
+                formData.append("orderLines", orderLinesJSON);
 
-                orderLineIds = orderLineIds.substring(0, orderLineIds.length - 1);
-                formData.append("orderLinesIds", orderLineIds);
                 clientToServer.postOrder(formData,this);
             },
             async createOrderLine(){

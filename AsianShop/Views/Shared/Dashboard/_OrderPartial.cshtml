@@ -23,7 +23,7 @@
                     <td>{{order.customer.lastName}}, {{order.customer.firstName}}</td>
                     <td>{{order.discount}}</td>
                     <td>{{order.totalPrice}}</td>
-                    <td>{{order.orderLinesIds}}</td>
+                    <td><button v-on:click="openOrderLines(index)">Show order</button></td>
                     <td>{{order.orderDate}}</td>
                      <td>{{order.lastPickUpDate}}</td>
                     <td class="Remove">
@@ -35,6 +35,32 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+
+    <div id="orderLinesModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <h2 style="text-align:center">Items</h2>
+                <div class="divOnTableLayout">
+                    <table class="table" border="1">
+                        <thead>
+                        <tr class="table-succes">
+                            <th>Id</th>
+                            <th>Product name</th>
+                            <th>Quantity</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="table-succes" v-for="oLine in order.orderLines">
+                            <td>{{oLine.id}}</td>
+                            <td>{{oLine.product.name}}</td>
+                            <td>{{oLine.amount}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="editCustomerModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
