@@ -1,5 +1,9 @@
 $(document).ready(function() {
-  
+    
+    $(".dropdown-menu").click(function(e){
+        e.stopPropagation();
+    });
+
     $("#navbarDropdownMenuLink").click(function(){
         //Get the items from local storrage and parse them as objects
         var itemsString = localStorage.getItem("items");
