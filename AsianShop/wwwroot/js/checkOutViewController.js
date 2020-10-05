@@ -71,12 +71,6 @@ $(document).ready(function() {
             clientToServer.getTypes(this);
             clientToServer.getOrderLine(this);
         },
-        mounted(){
-            $("#navbarDropdownMenuLink").on('click', function (e) {
-               alert("dfasfasdf");
-                e.stopPropagation();
-              });
-        },
         methods: {
             //Open the guest checkout
             openGuestCheckOut:function(){

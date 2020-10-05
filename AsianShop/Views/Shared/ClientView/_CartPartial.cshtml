@@ -1,6 +1,6 @@
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-   <div id="cartView" style="display:block">
-      <table class="table table-striped">
+   <div id="cartView" style="display:none">
+      <table class="table table-striped" id="itemsDisplay">
          <thead>
             <tr>
                <th scope="col">Item</th>
@@ -10,12 +10,12 @@
             </tr>
          </thead>
          <tbody>
-            <tr v-for="(item, index) in items">
-               <td>{{item.name}}</td>
-               <td>{{item.price}}</td>
-               <td>{{item.amount}}</td>
+            <tr w3-repeat="items">
+               <td>{{name}}</td>
+               <td>{{price}}</td>
+               <td>{{amount}}</td>
                <td>
-                  <button class="btn btn-danger" v-on:click="deleteItem(index)">X</button>
+                  <button class="btn btn-danger deleteButton">X</button>
                </td>
             </tr>
          </tbody>
@@ -23,10 +23,12 @@
       <div class="cart-total">
          <hr>
          <strong class="cart-total-title">Total</strong>
-            <span class="cart-total-price">
-              {{totalPrice}} kr
+            <span class="cart-total-price" id="totalPrice">
             </span>
       </div>
-      <button class="btn btn-primary customGreenButton" type="button" onclick="location.href='@Url.Action("Index", "Checkout")'">PURCHASE</button>
+      <button class="btn btn-primary customGreenButton" type="button" onclick="location.href='@Url.Action("Index", "Checkout")'">Checkout</button>
+   </div>
+   <div id="emptyCart" style="display:none">
+      <h4>Your cart is empty</h4>
    </div>
 </div>
