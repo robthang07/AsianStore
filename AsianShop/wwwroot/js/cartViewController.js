@@ -12,7 +12,7 @@ $(document).ready(function() {
             $("#cartView").show();
             $("#emptyCart").hide();
             var itemsArray = {items};
-            w3.displayObject("test",itemsArray);
+            w3.displayObject("itemsDisplay",itemsArray);
             document.getElementById("totalPrice").innerHTML = getTotalPrice(items)+"kr";
             $(".deleteButton").click(function(){
                 let index = $(this).parents("tr").index();
