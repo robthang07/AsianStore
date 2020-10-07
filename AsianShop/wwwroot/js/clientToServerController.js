@@ -139,4 +139,24 @@ class ClientToServerController{
                 $('#editTypeModal').modal('hide');
         })
     }
+    putProduct(formdata,self,id){
+        axios.put('api/server/products/'+id, formdata,
+            {
+                headers:{
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(function(response){
+
+            var index = self.productss.findIndex(p => p.id ==  response.data.id);
+
+            self.products[index] = response.data;
+
+            self.products.push(response.data);
+            self.products.pop();
+            $('#editProductModal').modal('hide');
+        }).catch(function (error) {
+            //handle error
+            console.log(error.message);
+        });;
+    }
 }

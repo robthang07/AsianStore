@@ -34,15 +34,16 @@
                   <button class="btn btn-danger" v-on:click="deleteProduct(product.id,index)">Delete</button>
                </td>
                <td>
-                  <button class="btn btn-primary" >Edit</button>
+                  <button class="btn btn-primary" v-on:click="openEditModal(product)">Edit</button>
                </td>
             </tr>
          </tbody>
       </table>
    </div>
    <div class="form-group">
-      <button v-on:click="openAddModal" class="btn btn-success">Add Product</button>
+      <button v-on:click="openAddModal" class="btn customGreenButton">Add Product</button>
    </div>
+
    <div id="addProductModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
          <div class="modal-content">
@@ -93,53 +94,73 @@
                </div>
                <div class="form-group col-md-6">
                   <label class="control-label">Product pic</label>
-                  <input type="file" class="productFile" ref="productFile" v-on:change="uploadProductFile()"/>
+                  <input type="file" class="files" ref="productFile" v-on:change="uploadProductFile()"/>
                   <span class="text-danger"></span>
                </div>
                <div class="form-group">
-                  <button v-on:click="addProduct" class="btn btn-success"> Add Product</button>
+                  <button v-on:click="addProduct" class="btn customGreenButton"> Add Product</button>
                </div>
          </div>
       </div>
    </div>
-   <div id="editCustomerModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
+
+   <div id="editProductModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
          <div class="modal-content">
-            <div class="divOnTableLayout">
-               <table class="table" border="1">
-                  <thead>
-                     <tr class="table-succes">
-                        <th>Id</th>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Email</th>
-                        <th>Phone number</th>
-                        <th>Post number</th>
-                        <th>Post place</th>
-                        <th>Post address</th>
-                        <th>Delivery post number</th>
-                        <th>Delivery post place</th>
-                        <th>Delivery post address</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <tr class="table-succes">
-                        <td id="customerId">{{customer.id}}</td>
-                        <td id="customerFirstName" contenteditable="true">{{customer.firstName}}</td>
-                        <td id="customerLastName" contenteditable="true">{{customer.lastName}}</td>
-                        <td id="customerEmail" contenteditable="true">{{customer.email}}</td>
-                        <td id="customerPhoneNumber" contenteditable="true">{{customer.phoneNumber}}</td>
-                        <td id="customerPostNumber" contenteditable="true">{{customer.postNumber}}</td>
-                        <td id="customerPostPlace" contenteditable="true">{{customer.postPlace}}</td>
-                        <td id="customerPostAddress" contenteditable="true">{{customer.postAddress}}</td>
-                        <td id="customerDPostNumber" contenteditable="true">{{customer.deliveryPostNumber}}</td>
-                        <td id="customerDPostPlace" contenteditable="true">{{customer.deliveryPostPlace}}</td>
-                        <td id="customerDPostAddress" contenteditable="true">{{ customer.deliveryPostAddress}}</td>
-                     </tr>
-                  </tbody>
-               </table>
-               <button class="btn btn-primary">Save</button>
-            </div>
+               <h2 style="text-align:center">Edit Product</h2>
+               <h6 class="necessaryInfo"></h6>
+               <div class="form-row">
+                  <p type="hidden" id="productId">{{product.id}}</p>
+                  <div class="form-group col-md-5">
+                     <label class="control-label">Product name</label>
+                     <input placeholder="Product name" v-model="product.name" class="form-control"/>
+                     <span class="text-danger"></span>
+                  </div>
+                  <div class="form-group col-md-5">
+                     <label class="control-label">From</label>
+                     <input placeholder="Product origin" v-model="product.from" class="form-control"/>
+                     <span class="text-danger"></span>
+                  </div>
+               </div>
+               <div class="form-row">
+                  <div class="form-group col-md-3">
+                     <label class="control-label">Price</label>
+                     <input placeholder="Price" type="number" v-model="product.price" class="form-control"/>
+                     <span class="text-danger"></span>
+                  </div>
+                  <div class="form-group col-md-3">
+                     <label class="control-label">Unit</label>
+                     <input placeholder="Unit of product" v-model="product.unit" class="form-control"/>
+                     <span class="text-danger"></span>
+                  </div>
+                  <div class="form-group col-md-2">
+                     <label class="control-label">Amount</label>
+                     <input placeholder="Amount" type="number" v-model="product.amount" class="form-control"/>
+                     <span class="text-danger"></span>
+                  </div>
+               </div>
+               <div class="form-row">
+                  <div class="form-group col-md-6">
+                     <label class="control-label">About</label>
+                     <textarea placeholder="About the product" v-model="product.about" class="form-control" row="4"></textarea>
+                     <span class="text-danger"></span>
+                  </div>
+                  <div class="form-group col-md-4">
+                     <label class="control-label">Type*</label>
+                     <select v-model="product.type">
+                        <option disabled value="">Please select a type</option>
+                        <option v-for="type in types" v-bind:value="type" v-bind:key="type.id">{{type.name}}</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="form-group col-md-6">
+                  <label class="control-label">Product pic</label>
+                  <input type="file" class="files" ref="editProductFile" v-on:change="uploadProductFile()"/>
+                  <span class="text-danger"></span>
+               </div>
+               <div class="form-group">
+                  <button v-on:click="editProduct()" class="btn customGreenButton"> Save edit</button>
+               </div>
          </div>
       </div>
    </div>

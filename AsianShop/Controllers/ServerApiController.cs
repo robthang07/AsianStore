@@ -185,7 +185,7 @@ namespace AsianShop.Controllers
         }
 
         [HttpPost("types")]
-        public async Task<IActionResult> PostTypes([FromForm] Type types)
+        public IActionResult PostTypes([FromForm] Type types)
         {
             if(types.id != 0){       
                 return BadRequest();
@@ -255,12 +255,13 @@ namespace AsianShop.Controllers
                     var oLineIdList = new List<int>();
                     foreach(var i in oLines){
                         var productId = (int)i.productId;
-                        var amount = (int)i.amount;
+                        var amount = (uint)i.amount;
                         var product = _db.Products.Find(productId);
                         OrderLine orderLine = new OrderLine(product,amount);
                         PostOrderLines(orderLine);
                         oLineList.Add(orderLine);
                         oLineIdList.Add(orderLine.Id);
+                        product.setNewQuantity(amount);
                     }
                     order.OrderLinesIds = string.Join(",",oLineIdList);
                     order.OrderLines = oLineList;
@@ -327,7 +328,7 @@ namespace AsianShop.Controllers
         }
 
         [HttpDelete("customers/{id}")]
-        public async Task<ActionResult> DeleteCustomer(int id)
+        public IActionResult DeleteCustomer(int id)
         {
             var customer = _db.Customers.Find(id);
             if (customer == null)
@@ -411,5 +412,28 @@ namespace AsianShop.Controllers
             
             return Ok(type);
         }
+
+        [HttpPut("products/{id}")]
+        public async Task<IActionResult> PutProduct([FromForm]Product product)
+        {
+            if (!_db.Products.Any(p => p.Id == product.Id))
+            {
+                return NotFound();
+            }
+
+            if(product.File != null)
+            {
+                if(await _pr.StoreProduct(product,product.Id) == false)
+                {
+                    return BadRequest();
+                }
+            }
+
+            _db.Update(product);
+            _db.SaveChanges();
+            
+            return Ok(product);
+        }
+
     }
 }
