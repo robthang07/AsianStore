@@ -157,6 +157,8 @@ namespace AsianShop.Controllers
         [HttpPost("products")]
         public async Task<IActionResult> PostProduct([FromForm] Product product)
         {
+            string stringPrice = Request.Form["newPrice"];
+            decimal price =decimal.Parse(stringPrice, System.Globalization.CultureInfo.InvariantCulture);
             if (product.Id != 0)
             {
                 return BadRequest();
@@ -175,7 +177,7 @@ namespace AsianShop.Controllers
                 }
 
                 product.Type = _db.Types.Find(product.TypeId);
-
+                product.Price = price;
                 _db.Add(product);
                 _db.SaveChanges();
 
@@ -416,6 +418,9 @@ namespace AsianShop.Controllers
         [HttpPut("products/{id}")]
         public async Task<IActionResult> PutProduct([FromForm]Product product)
         {
+            string stringPrice = Request.Form["newPrice"];
+            decimal price =decimal.Parse(stringPrice, System.Globalization.CultureInfo.InvariantCulture);
+
             if (!_db.Products.Any(p => p.Id == product.Id))
             {
                 return NotFound();
@@ -428,7 +433,8 @@ namespace AsianShop.Controllers
                     return BadRequest();
                 }
             }
-
+            product.Type = _db.Types.Find(product.TypeId);
+            product.Price = price;
             _db.Update(product);
             _db.SaveChanges();
             

@@ -28,7 +28,7 @@ namespace AsianShop.Data
             um.CreateAsync(user, "Password1.").Wait();
             user.EmailConfirmed = true;
             
-            var hotFood = new Type("Hot food");
+            var hotFood = new Type("Hot_food");
             db.Add(hotFood);
             var fruit = new Type("Fruits");
             db.Add(fruit);
@@ -42,7 +42,7 @@ namespace AsianShop.Data
             var item2 = new Product("Apples", 12.99M, "/resources/DatabaseFiles/Fruits/2.png", 30, fruit.id,fruit,"kg","France","Exotic");
             db.Add(item2);
             db.SaveChanges();
-            var item3 = new Product("Pizza", 12.99M, "/resources/DatabaseFiles/HotFood/3.png", 30, hotFood.id,hotFood,"pcs","Italy","Exotic");
+            var item3 = new Product("Pizza", 12.99M, "/resources/DatabaseFiles/Hot_food/3.png", 30, hotFood.id,hotFood,"pcs","Italy","Exotic");
             db.Add(item3);
             db.SaveChanges();
             var item4 = new Product("Pear", 10.99M, "/resources/DatabaseFiles/Fruits/4.png", 30, fruit.id,fruit,"kg","Portugal","Exotic");

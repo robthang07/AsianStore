@@ -140,7 +140,7 @@ $(document).ready(function() {
                 formData.append('amount', this.product.amount);
                 formData.append('type', this.product.type);
                 formData.append('typeId',this.product.typeId);
-                formData.append('price', this.product.price);
+                formData.append('newPrice', this.product.price);
                 formData.append('about', this.product.about);
                 formData.append('unit', this.product.unit);
                 formData.append('from', this.product.from);
@@ -185,6 +185,7 @@ $(document).ready(function() {
 
             editProduct:function(){
                 this.product.typeId = this.product.type.id;
+                var price = this.product.price;      
                 let formData = new FormData();
                 let id = parseInt($('#productId').html());
                 formData.append('id',id);
@@ -194,14 +195,11 @@ $(document).ready(function() {
                 formData.append('amount', this.product.amount);
                 formData.append('type', this.product.type);
                 formData.append('typeId',this.product.typeId);
-                formData.append('price', this.product.price);
+                formData.append('newPrice', price);
                 formData.append('about', this.product.about);
                 formData.append('unit', this.product.unit);
                 formData.append('from', this.product.from);
-                // Display the key/value pairs
-                for (var pair of formData.entries()) {
-                    console.log(pair[0]+ ', ' + pair[1]); 
-                }                
+                         
                 $(".files").val("");
                 clientToServer.putProduct(formData, this, id);
             },
