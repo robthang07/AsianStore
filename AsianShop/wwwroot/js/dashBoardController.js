@@ -125,6 +125,12 @@ $(document).ready(function() {
                     $('#editProductModal').modal('show');
                 }
             },
+            openImage:function(image,i){
+                this.frontImage.filePath = image.filePath;
+                this.frontImage.name = image.name;
+                this.frontImage.id = image.id;
+                $("#imageDisplayer").modal('show');
+            },
             openOrderLines(index){
                 this.order = this.orders[index];
                 $('#orderLinesModal').modal('show');
@@ -154,6 +160,7 @@ $(document).ready(function() {
             },
             
             addImage:function(){
+                this.clearTypeInfo();
                 let formData = new FormData();
                 formData.append('name',this.frontImage.name);
                 formData.append('file',this.frontImage.file);
@@ -163,8 +170,8 @@ $(document).ready(function() {
             
             /*****************************Delete************************/
             
-            deleteFrontImage:function(id, index){
-                clientToServer.deleteFrontImage(this,id,index);
+            deleteFrontImage:function(id){
+                clientToServer.deleteFrontImage(this,id);
             },
             deleteCustomer:function(id,index){
               clientToServer.deleteCustomer(this,id,index);  

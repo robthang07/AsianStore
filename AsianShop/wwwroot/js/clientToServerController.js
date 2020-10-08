@@ -108,9 +108,11 @@ class ClientToServerController{
         })
     }
     /*****************************Delete***************************************/
-    deleteFrontImage(self,id,index){
-        axios.delete('api/server/frontImages/'+id).then(function(){
+    deleteFrontImage(self,id){
+        axios.delete('api/server/frontImages/'+id).then(function(response){
+            var index = self.frontImages.findIndex(f => f.id == response.data.id);
             self.frontImages.splice(index,1);
+            $("#imageDisplayer").modal('hide');
         });
     }
     deleteCustomer(self,id,index){
