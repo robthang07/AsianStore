@@ -108,9 +108,11 @@ class ClientToServerController{
         })
     }
     /*****************************Delete***************************************/
-    deleteFrontImage(self,id,index){
-        axios.delete('api/server/frontImages/'+id).then(function(){
+    deleteFrontImage(self,id){
+        axios.delete('api/server/frontImages/'+id).then(function(response){
+            var index = self.frontImages.findIndex(f => f.id == response.data.id);
             self.frontImages.splice(index,1);
+            $("#imageDisplayer").modal('hide');
         });
     }
     deleteCustomer(self,id,index){
@@ -138,5 +140,23 @@ class ClientToServerController{
                 self.types.pop();
                 $('#editTypeModal').modal('hide');
         })
+    }
+    putProduct(formdata,self,id){
+        axios.put('api/server/products/'+id, formdata,
+            {
+                headers:{
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(function(response){
+
+            var index = self.products.findIndex(p => p.id ==  response.data.id);
+
+            self.products[index] = response.data;
+            self.products.push(response.data);
+            self.products.pop();
+            $('#editProductModal').modal('hide');
+        }).catch(function (error) {
+            console.log(error.message);
+        });;
     }
 }

@@ -93,21 +93,43 @@ $(document).ready(function() {
             
             openAddModal(){
                 if($('#products').is(':visible')){
+                    this.clearProductInfo();
                     $('#addProductModal').modal('show');
                 }      
                 else if($('#types').is(':visible')){
+                    this.clearTypeInfo();
                     $('#addTypeModal').modal('show');
                 }
                 else if($('#frontImages').is(':visible')){
+                    this.clearImageInfo();
                     $('#addImageModal').modal('show');
                 }
             },
-            openEditModal:function(type){
+            openEditModal:function(x){
                 if($('#types').is(':visible')){
-                    this.type.id = type.id;
-                    this.type.name = type.name;
+                    this.type.id = x.id;
+                    this.type.name = x.name;
                     $('#editTypeModal').modal('show');
                 }
+                if($('#products').is(':visible')){
+                    this.product.id = x.id;
+                    this.product.name = x.name;
+                    this.product.price = x.price;
+                    this.product.type = x.type;
+                    this.product.unit = x.unit;
+                    this.product.from = x.from;
+                    this.product.about = x.about;
+                    this.product.amount = x.amount;
+                    this.product.filePath = x.filePath;
+                    $(".elementFile").val("");
+                    $('#editProductModal').modal('show');
+                }
+            },
+            openImage:function(image){
+                this.frontImage.filePath = image.filePath;
+                this.frontImage.name = image.name;
+                this.frontImage.id = image.id;
+                $("#imageDisplayer").modal('show');
             },
             openOrderLines(index){
                 this.order = this.orders[index];
@@ -115,6 +137,7 @@ $(document).ready(function() {
             },
             /*****************************Add************************/
             addProduct:function(){
+
                 this.product.typeId = this.product.type.id;
                 let formData = new FormData();
                 formData.append('file', this.product.file);
@@ -123,7 +146,7 @@ $(document).ready(function() {
                 formData.append('amount', this.product.amount);
                 formData.append('type', this.product.type);
                 formData.append('typeId',this.product.typeId);
-                formData.append('price', this.product.price);
+                formData.append('newPrice', this.product.price);
                 formData.append('about', this.product.about);
                 formData.append('unit', this.product.unit);
                 formData.append('from', this.product.from);
@@ -134,12 +157,12 @@ $(document).ready(function() {
                 let formData = new FormData();
                 formData.append('name',this.type.name);
                 clientToServer.postType(formData,this);
-                console.log("Hei");
             },
             
             addImage:function(){
+                this.clearTypeInfo();
                 let formData = new FormData();
-                formData.append('name',this.type.name);
+                formData.append('name',this.frontImage.name);
                 formData.append('file',this.frontImage.file);
                 formData.append('filePath', this.frontImage.filePath);
                 clientToServer.postFrontImage(formData,this);
@@ -147,8 +170,8 @@ $(document).ready(function() {
             
             /*****************************Delete************************/
             
-            deleteFrontImage:function(id, index){
-                clientToServer.deleteFrontImage(this,id,index);
+            deleteFrontImage:function(id){
+                clientToServer.deleteFrontImage(this,id);
             },
             deleteCustomer:function(id,index){
               clientToServer.deleteCustomer(this,id,index);  
@@ -167,6 +190,27 @@ $(document).ready(function() {
                 clientToServer.editType(this,id);
             },
 
+            editProduct:function(){
+                this.product.typeId = this.product.type.id;
+                var price = this.product.price;      
+                let formData = new FormData();
+                let id = parseInt($('#productId').html());
+                formData.append('id',id);
+                formData.append('file', this.product.file);
+                formData.append('filePath', this.product.filePath);
+                formData.append('name', this.product.name);
+                formData.append('amount', this.product.amount);
+                formData.append('type', this.product.type);
+                formData.append('typeId',this.product.typeId);
+                formData.append('newPrice', price);
+                formData.append('about', this.product.about);
+                formData.append('unit', this.product.unit);
+                formData.append('from', this.product.from);
+                         
+                $(".files").val("");
+                clientToServer.putProduct(formData, this, id);
+            },
+
             /*********************** File *************************/
 
             //Checks if it's add or edit then sets the file into the structure object
@@ -175,7 +219,7 @@ $(document).ready(function() {
                     this.product.file = this.$refs.productFile.files[0];
                 }
                 else{
-                    this.product.file = this.$refs.structureEditFile.files[0];
+                    this.product.file = this.$refs.editProductFile.files[0];
                 }
             },
             uploadImage:function(){
@@ -191,6 +235,29 @@ $(document).ready(function() {
                 $("#frontImages").hide();
                 $("#resetButton").hide();
             },
+
+            clearProductInfo:function(){
+                this.product.id = 0;
+                this.product.name = "";
+                this.product.price = 0;
+                this.product.type = [];
+                this.product.unit = "";
+                this.product.from = "";
+                this.product.about = "";
+                this.product.amount = 0;
+                $(".files").val("");
+            },
+
+            clearTypeInfo:function(){
+                this.type.id = 0;
+                this.type.name = "";
+            },
+            clearImageInfo:function(){
+                this.frontImage.id = 0;
+                this.frontImage.name = "";
+                $(".files").val("");
+            }
+        
         }
     })
 });

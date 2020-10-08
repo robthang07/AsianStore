@@ -10,7 +10,7 @@ namespace AsianShop.Models
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Amount { get; set; }
+        public uint Amount { get; set; }
         public decimal Price { get; set; }
 
         public string Unit { get; set; }
@@ -29,7 +29,7 @@ namespace AsianShop.Models
         public Type Type { get; set;}
 
         public Product(){}
-        public Product(string name,decimal price, string filePath, int amount, int id,Type type, string unit, string from, string about)
+        public Product(string name,decimal price, string filePath, uint amount, int id,Type type, string unit, string from, string about)
         {
             this.Name = name;
             this.Price = price;
@@ -40,6 +40,11 @@ namespace AsianShop.Models
             this.Unit = unit;
             this.From = from;
             this.About = about;
+        }
+
+        public void setNewQuantity(uint quantity)
+        {    
+            this.Amount = this.Amount-quantity;
         }
     }
 }

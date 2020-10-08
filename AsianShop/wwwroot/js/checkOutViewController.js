@@ -101,27 +101,7 @@ $(document).ready(function() {
                 formData.append("orderLines", orderLinesJSON);
 
                 clientToServer.postOrder(formData,this);
-            },
-            async createOrderLine(){
-                let formData = new FormData();
-                
-                for(i = 0;i < this.items.length; i++){
-                    if(!formData.has("productId")){
-                    formData.append("productId", this.items[i].id);
-                    formData.append("amount", this.items[i].amount);
-                    await clientToServer.postOrderLine(formData,this);
-                    }
-                    else{
-                    //Have to remove all the old values so the formdata wont get same values
-                    formData.delete("productId");
-                    formData.delete("amount");
-
-                    formData.append("productId", this.items[i].id);
-                    formData.append("amount", this.items[i].amount);
-                    await clientToServer.postOrderLine(formData,this);
-                    }
-                }   
-         
+                localStorage.clear();
             },
            
             getTotalPrice: function(){

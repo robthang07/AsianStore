@@ -39,11 +39,13 @@
                 <hr/>
                 <p id="warning"></p>
                 <h3>Add to cart</h3>
-                <input type="number" id="amount" min="1" max="20" v-model="orderLine.amount">
-                <span style="margin-left:10px;">
+                <p id="amountMessage" style="display:none;color:red;"></p>
+                <select class="cart-quantity-input" name="selectQuantity" id="selectQuantity"></select>
+                <span style="margin-left:-25px;" id="unit">
                     @Html.DisplayFor(model => model.Unit)
                 </span>
                 <br><br>
+                <input id="productAmount" type="hidden" value="@Model.Amount">
                 <input id="name" type="hidden" value="@Model.Name">
                 <input id="price" type="hidden" value="@Model.Price">
                 <input id="filePath" type="hidden" value="@Model.FilePath">
