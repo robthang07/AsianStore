@@ -125,7 +125,7 @@ $(document).ready(function() {
                     $('#editProductModal').modal('show');
                 }
             },
-            openImage:function(image,i){
+            openImage:function(image){
                 this.frontImage.filePath = image.filePath;
                 this.frontImage.name = image.name;
                 this.frontImage.id = image.id;
