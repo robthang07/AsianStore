@@ -8,7 +8,6 @@ $(document).ready(function() {
         //Get the items from local storrage and parse them as objects
         var itemsString = localStorage.getItem("items");
         var items = JSON.parse(itemsString);  
-        console.log(items);
         if( items != null && items.length != 0){
             $("#cartView").show();
             $("#emptyCart").hide();

@@ -1,52 +1,53 @@
 <div id="checkout" v-cloak>
     <div id="checkoutPartial">
-<div class="row">
-<div class="columnDetail">
-            <table class="table table-hover table-primary">
-                <thead>
-                <tr>
-                    <th scope="col">Cart</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        <div class="row">
-                            <div class="column" v-for="(item, index) in items">
-                                <div class="card">
-                                    <img class="contain" :src="item.filePath" height="150" style="width:100%"/>
-                                    <h3>{{item.name}}</h3>
-                                    <p class="price">{{item.price}} kr</p>
-                                    <input type="number" v-model="item.amount"/>
+        <div class="row">
+            <div class="columnDetail">
+                <table class="table table-hover table-primary">
+                    <thead>
+                        <tr>
+                            <th scope="col">Cart</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="row">
+                                    <div class="column" v-for="(item, index) in items">
+                                        <div class="card">
+                                            <img class="contain" :src="item.filePath" height="150" style="width: 100%;" />
+                                            <h3>{{item.name}}</h3>
+                                            <p class="price">{{item.price}} kr</p>
+                                            <input type="number" v-model="item.amount" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <hr/>
-                        <h2>Total price: {{totalPrice}} kr</h2>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+                                <hr />
+                                <h2>Total price: {{totalPrice}} kr</h2>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="columnDetail">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Checkout</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="openGuestCheckOut">Checkout as guest</button>
+                                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">
+                                    <button type="button" class="btn btn-secondary btn-lg btn-block">Login</button>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-<div class="columnDetail">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">Checkout</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>
-                <button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="openGuestCheckOut">Checkout as guest</button>
-                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">
-                    <button type="button" class="btn btn-secondary btn-lg btn-block">Login</button>
-                </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-</div>    </div>
-        <partial name="Checkout/_CheckoutGuestPartial"/>
+    </div>
+    <partial name="Checkout/_CheckoutGuestPartial" />
 </div>

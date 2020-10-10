@@ -66,6 +66,7 @@ $(document).ready(function() {
             }
         },
         created: function () {
+            this.isCartEmpty();
             this.getTotalPrice();
             clientToServer.getProducts(this);
             clientToServer.getTypes(this);
@@ -77,31 +78,13 @@ $(document).ready(function() {
                 $("#checkoutGuestPartial").show();
                 $("#checkoutPartial").hide();
             },
-             async checkoutGuest(){
-               
-                let formData = new FormData();
-            
-                formData.append("firstName",this.customer.firstName);
-                formData.append("lastName", this.customer.lastName);
-                formData.append("email", this.customer.email);
-                formData.append("phoneNumber", this.customer.phoneNumber);
-                formData.append("postAddress", this.customer.postAddress);
-                formData.append("postPlace", this.customer.postPlace);
-                formData.append("postNumber", this.customer.postNumber);
-                formData.append("totalPrice", this.totalPrice);
-                let orderLines = [];
-                for(i = 0;i < this.items.length; i++){
-                    item = {
-                        productId: this.items[i].id,
-                        amount: this.items[i].amount
-                    }
-                    orderLines.push(item);
+            checkoutGuest:function(){
+                if(this.isFilled()==true){
+                    $('#overview').modal('show');
                 }
-                var orderLinesJSON = JSON.stringify(orderLines);
-                formData.append("orderLines", orderLinesJSON);
-
-                clientToServer.postOrder(formData,this);
-                localStorage.clear();
+                else{
+                    return $("#invalid").css("visibility","visible").text("Please fill in the required inputs");
+                }
             },
            
             getTotalPrice: function(){
@@ -115,8 +98,72 @@ $(document).ready(function() {
                      totPrice+= floatPrice*amount;
                 }
                 this.totalPrice = totPrice.toFixed(2);
-            }
+            },
 
+            isFilled: function(){
+                var form = document.getElementById("checkoutForm").elements;
+                var invalidFeedBacks = $(".invalid-feedback");
+                let email = $("#validationCustomEmail").val();
+                let length = form.length-2;
+                for (i=0; i < length; i++) {
+                    let value = form[i].value;
+                    if(value == ""){
+                        invalidFeedBacks.eq(i).css( "display", "block" );
+                        return false;
+                    }
+                    if(!(form[i].value=="")){
+                        invalidFeedBacks.eq(i).css( "display", "none" );
+                    }
+                }
+                if((!this.validEmail(email))){
+                    return false;
+                }
+                if(!($("#checkbox").is(":checked"))){
+                    $("#invalidCheckbox").css("display","block");
+                    return false;
+                }
+                else{
+                    $("#invalidCheckbox").css("display","none");
+                }
+                return true;
+            },
+
+            validEmail:function(email){
+                var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                if(!re.test(email)){
+                    $("#invalidEmail").css("display","block");
+                }
+                return re.test(email);
+            },
+            async purchase(){
+                let formData = new FormData();
+                    formData.append("firstName",this.customer.firstName);
+                    formData.append("lastName", this.customer.lastName);
+                    formData.append("email", this.customer.email);
+                    formData.append("phoneNumber", this.customer.phoneNumber);
+                    formData.append("postAddress", this.customer.postAddress);
+                    formData.append("postPlace", this.customer.postPlace);
+                    formData.append("postNumber", this.customer.postNumber);
+                    formData.append("totalPrice", this.totalPrice);
+                    let orderLines = [];
+                    for(i = 0;i < this.items.length; i++){
+                        item = {
+                            productId: this.items[i].id,
+                            amount: this.items[i].amount
+                        }
+                        orderLines.push(item);
+                    }
+                    var orderLinesJSON = JSON.stringify(orderLines);
+                    formData.append("orderLines", orderLinesJSON);
+                    await clientToServer.postOrder(formData,this);
+                    window.location.replace("/checkout/receipt");
+                    localStorage.clear();
+            },
+            isCartEmpty:function(){
+                if(itemsObj == null || itemsObj == ""){    
+                    window.location.replace("/products");
+                }
+            }
         }
     })
 });

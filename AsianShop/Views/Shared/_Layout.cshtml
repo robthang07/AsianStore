@@ -75,7 +75,10 @@
                 <script src="~/js/dashboardController.js" defer></script>
             }
         if (currentController.Equals("Checkout")){
-            <script src="~/js/checkOutViewController.js" defer></script>
+            if(currentAction.Equals("Index"))
+            {
+                <script src="~/js/checkOutViewController.js" defer></script>
+            }   
         }
     }
 }
