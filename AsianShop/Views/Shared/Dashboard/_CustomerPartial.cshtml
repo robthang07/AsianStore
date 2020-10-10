@@ -14,8 +14,8 @@
                     <th>Post number</th>
                     <th>Post place</th>
                     <th>Post address</th>
-                    <th>Delete</th>
                     <th>Edit</th>
+                    <th>Delete</th>    
                 </tr>
             </thead>
             <tbody>
@@ -28,11 +28,11 @@
                     <td> {{ customer.postNumber }} </td>
                     <td> {{ customer.postPlace }} </td>
                     <td> {{ customer.postAddress }} </td>
-                    <td class="Remove">
-                        <button class="btn btn-danger" v-on:click="deleteCustomer(customer.id,index)">Delete</button>
-                    </td>
                     <td>
                         <button class="btn btn-primary" >Edit</button>
+                    </td>
+                    <td class="Remove">
+                        <button class="btn btn-danger" v-on:click="deleteCustomer(customer.id,index)">Delete</button>
                     </td>
                 </tr>
             </tbody>

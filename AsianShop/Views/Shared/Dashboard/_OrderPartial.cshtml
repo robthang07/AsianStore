@@ -10,11 +10,11 @@
                     <th>Customer's name</th>
                     <th>Discount</th>
                     <th>Total price</th>
-                    <th>Order lines ids</th>
+                    <th>Items</th>
                     <th>Order date</th>
                     <th>Last pickup date</th>
-                    <th>Delete</th>
                     <th>Edit</th>
+                    <th>Delete</th>    
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +26,9 @@
                     <td><button v-on:click="openOrderLines(index)">Show order</button></td>
                     <td>{{order.orderDate}}</td>
                      <td>{{order.lastPickUpDate}}</td>
+                      <td>
+                        <button class="btn btn-primary" >Edit</button>
+                    </td>
                     <td class="Remove">
                         <button class="btn btn-danger" v-on:click="deleteOrder(order.id,index)">Delete</button>
                     </td>

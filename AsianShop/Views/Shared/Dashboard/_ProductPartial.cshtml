@@ -15,8 +15,8 @@
                <th>About</th>
                <th>Amount</th>
                <th>File Path</th>
-               <th>Delete</th>
                <th>Edit</th>
+               <th>Delete</th>   
             </tr>
          </thead>
          <tbody>
@@ -30,12 +30,12 @@
                <td>{{product.about}}</td>
                <td>{{product.amount}}</td>
                <td>{{product.filePath}}</td>
-               <td class="Remove">
-                  <button class="btn btn-danger" v-on:click="deleteProduct(product.id,index)">Delete</button>
-               </td>
                <td>
                   <button class="btn btn-primary" v-on:click="openEditModal(product)">Edit</button>
                </td>
+               <td class="Remove">
+                  <button class="btn btn-danger" v-on:click="deleteProduct(product.id,index)">Delete</button>
+               </td>   
             </tr>
          </tbody>
       </table>
