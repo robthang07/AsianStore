@@ -1,34 +1,33 @@
 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-   <div id="cartView" style="display:none">
-      <table class="table table-striped" id="itemsDisplay">
-         <thead>
-            <tr>
-               <th scope="col">Item</th>
-               <th scope="col">Price</th>
-               <th scope="col">Quantity</th>
-               <th scope="col">Delete</th>
-            </tr>
-         </thead>
-         <tbody>
-            <tr w3-repeat="items">
-               <td>{{name}}</td>
-               <td>{{price}}</td>
-               <td>{{amount}}</td>
-               <td>
-                  <button class="btn btn-danger deleteButton">X</button>
-               </td>
-            </tr>
-         </tbody>
-      </table>
-      <div class="cart-total">
-         <hr>
-         <strong class="cart-total-title">Total</strong>
-            <span class="cart-total-price" id="totalPrice">
-            </span>
-      </div>
-      <button class="btn btn-primary customGreenButton" type="button" onclick="location.href='@Url.Action("Index", "Checkout")'">Checkout</button>
-   </div>
-   <div id="emptyCart" style="display:none">
-      <h4>Your cart is empty</h4>
-   </div>
+    <div id="cartView" style="display: none;">
+        <table class="table table-striped" id="itemsDisplay">
+            <thead>
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr w3-repeat="items">
+                    <td>{{name}}</td>
+                    <td>{{price}}</td>
+                    <td>{{amount}}</td>
+                    <td>
+                        <button class="btn btn-danger deleteButton">X</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="cart-total">
+            <hr />
+            <strong class="cart-total-title">Total</strong>
+            <span class="cart-total-price" id="totalPrice"> </span>
+        </div>
+         <button class="btn btn-primary customGreenButton" type="button" onclick="location.href='@Url.Action("Index", "Checkout")'">Checkout</button>
+    </div>
+    <div id="emptyCart" style="display: none;">
+        <h4>Your cart is empty</h4>
+    </div>
 </div>

@@ -72,16 +72,17 @@ class ClientToServerController{
        self.orderLines.push(response.data);     
     }
     
-    postOrder(formData,self){
-        axios.post('api/server/orders',formData,
+    async postOrder(formData,self){
+        let response = await axios.post('api/server/orders',formData,
             {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
-            }).then(function(response){
-            console.log("Order successfully added");
-            self.orders.push(response.data);
+            }).catch(function (error) {
+            console.log(error.message);
         });
+        console.log("Order successfully added");
+        self.orders.push(response.data);
     }
 
     postCustomer(formData,self){

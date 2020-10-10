@@ -14,16 +14,13 @@ namespace AsianShop.Controllers
             _context = context;
         }
         // GET
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var orderLines = _context.OrderLines;
-            
-            foreach (var o in orderLines)
-            {
-                o.Product = _context.Products.Find(o.ProductId);
-                o.Product.Type = _context.Types.Find(o.Product.TypeId);
-            }
-            return View(await orderLines.ToListAsync());
+            return View();
+        }
+        public IActionResult Receipt()
+        {
+            return View();
         }
     }
 }
