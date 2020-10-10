@@ -18,24 +18,9 @@ namespace AsianShop.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> Receipt(int? id)
+        public IActionResult Receipt()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var order = await _context.Orders
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (order == null)
-            {
-                return NotFound();
-            }
-            
-
-            //order.Type = _context.Types.Find(product.TypeId);
-
-            return View(order);
+            return View();
         }
     }
 }
