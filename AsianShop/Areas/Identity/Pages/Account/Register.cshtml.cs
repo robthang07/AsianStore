@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using MailKit.Net.Smtp;
+using MimeKit;
+using MimeKit.Text;
 
 namespace AsianShop.Areas.Identity.Pages.Account
 {
@@ -114,8 +117,10 @@ namespace AsianShop.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    sendEmail(Input, "Confirm your email",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");/* _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");*/
+
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
@@ -135,6 +140,25 @@ namespace AsianShop.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+         public void sendEmail(InputModel input,string subject, string htmlMessage)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("AsianShop","yourasianshop@gmail.com"));
+            message.To.Add(new MailboxAddress(input.FirstName, input.Email));
+            message.Subject = subject;
+            message.Body = new TextPart(TextFormat.Html) 
+            { 
+                Text = "Hi, "+input.FirstName +", thank your for your registration!"+"<br>"+ htmlMessage
+            };
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp.gmail.com",587,false);
+                client.Authenticate("yourasianshop@gmail.com","duerfaenstygg1");
+                client.Send(message);
+                client.Disconnect(true);
+            }
         }
     }
 }

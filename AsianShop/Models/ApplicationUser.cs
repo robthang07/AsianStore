@@ -6,7 +6,7 @@ namespace AsianShop.Models
     {
         //Email of Customer
         //TODO should this be used as ID or generated from dotnet?
-        public string Email { get; set; }
+        public override string Email { get; set; }
         //First Name(s) of Customer
         public string FirstName { get; set; }
         //Last Name(s) of Customer
