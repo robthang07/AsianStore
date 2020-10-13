@@ -1,3 +1,9 @@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@model ApplicationUser
+
+
 <div id="checkout" v-cloak>
     <div id="checkoutPartial">
         <div class="row">
@@ -38,14 +44,76 @@
                     <tbody>
                         <tr>
                             <td>
-                                <button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="openGuestCheckOut">Checkout as guest</button>
-                                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">
-                                    <button type="button" class="btn btn-secondary btn-lg btn-block">Login</button>
-                                </a>
+                                @if (SignInManager.IsSignedIn(User))
+                                {
+                                    <input id="firstName" value="@Model.FirstName" type="hidden">
+                                    <input id="lastName" value="@Model.LastName" type="hidden">
+                                    <input id="email" value="@Model.Email" type="hidden">
+                                    <input id="postAddress" value="@Model.PostAddress" type="hidden">
+                                    <input id="zip" value="@Model.PostNumber" type="hidden">
+                                    <input id="city" value="@Model.PostPlace" type="hidden">
+                                    <input id="phoneNr" value="@Model.PhoneNumber" type="hidden">
+                                    <button type="button" class="btn customGreen" v-on:click="loggedInCustomer()">Overview</button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="openGuestCheckOut">Checkout as guest</button>
+                                    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">
+                                        <button type="button" class="btn btn-secondary btn-lg btn-block">Login</button>
+                                    </a>
+                                }    
                             </td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="overview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" style="text-align: center;">Overview</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h4>Customer's details</h4>
+                    <p>Name: {{customer.firstName}} {{customer.lastName}}</p>
+                    <p>Email: {{customer.email}}</p>
+                    <p>Phone number: {{customer.phoneNumber}}</p>
+                    <p>Address: {{customer.postAddress}}, {{customer.postPlace}}, {{customer.postNumber}}</p>
+                    <hr />
+                    <h4>Items</h4>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Item</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="item in items">
+                                <td>{{item.name}}</td>
+                                <td>{{item.price}}</td>
+                                <td>{{item.amount}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th scope="row">Totals:</th>
+                                <td>{{totalPrice}}kr</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn customGreen" v-on:click="purchase">Purchase</button>
+                </div>
             </div>
         </div>
     </div>

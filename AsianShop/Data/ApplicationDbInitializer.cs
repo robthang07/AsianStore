@@ -24,7 +24,8 @@ namespace AsianShop.Data
             um.AddToRoleAsync(admin, "Admin").Wait();
             admin.EmailConfirmed = true;
 
-            var user = new ApplicationUser { UserName = "user@uia.no", Email = "user@uia.no" };
+            var user = new ApplicationUser { UserName = "user@uia.no", Email = "user@uia.no", FirstName ="Rob", 
+            LastName="Jenga", PostAddress="Test232", PostNumber="4212", PostPlace="Paris", PhoneNumber="12345678" };
             um.CreateAsync(user, "Password1.").Wait();
             user.EmailConfirmed = true;
             

@@ -12,7 +12,7 @@ namespace AsianShop.Models
         //Last Name(s) of Customer
         public string LastName { get; set; }
         //Phone Number of Customer
-        public string PhoneNumber { get; set; }
+        public override string PhoneNumber { get; set; }
         //Living Address of Customer, where they live
         //Not always same as where they want the garage
         public string PostAddress { get; set; }
