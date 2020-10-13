@@ -78,6 +78,16 @@ $(document).ready(function() {
                 $("#checkoutGuestPartial").show();
                 $("#checkoutPartial").hide();
             },
+            loggedInCustomer:function(){
+                this.customer.firstName = document.getElementById("firstName").value;
+                this.customer.lastName = document.getElementById("lastName").value;
+                this.customer.email = document.getElementById("email").value;
+                this.customer.postAddress = document.getElementById("postAddress").value;
+                this.customer.postNumber = document.getElementById("zip").value;
+                this.customer.postPlace = document.getElementById("city").value;
+                this.customer.phoneNumber = document.getElementById("phoneNr").value;
+                $('#overview').modal('show');
+            },
             checkoutGuest:function(){
                 if(this.isFilled()==true){
                     $('#overview').modal('show');

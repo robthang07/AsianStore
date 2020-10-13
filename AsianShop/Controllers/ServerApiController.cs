@@ -477,16 +477,23 @@ namespace AsianShop.Controllers
                 "<p>Name: "+order.Customer.FirstName + " "+ order.Customer.LastName + "</p>"+
                 "<p>Email: "+order.Customer.Email+"</p>"+
                 "<p>Phone number: "+order.Customer.PhoneNumber+"</p>"+
-                "<p>Address: "+order.Customer.PostAddress+" "+ order.Customer.PostPlace+" "+ order.Customer.PostNumber +"</p><hr>"+
+                "<p>Address: "+order.Customer.PostAddress+", "+ order.Customer.PostPlace+", "+ order.Customer.PostNumber +"</p><hr>"+
                 html
             };
 
             using (var client = new SmtpClient())
             {
-                client.Connect("smtp.gmail.com",587,false);
-                client.Authenticate("yourasianshop@gmail.com","duerfaenstygg1");
-                client.Send(message);
-                client.Disconnect(true);
+                try 
+                {
+                    client.Connect("smtp.gmail.com",587,false);
+                    client.Authenticate("yourasianshop@gmail.com","duerfaenstygg1");
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+                catch
+                {
+                    System.Console.WriteLine("Something went wrong");
+                }
             }
 
             return Ok();
