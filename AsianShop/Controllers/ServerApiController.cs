@@ -6,7 +6,11 @@ using AsianShop.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Text.Json.Serialization;
+using MailKit.Net.Smtp;
+using MimeKit;
+using MimeKit.Text;
+
 namespace AsianShop.Controllers
 {
     [ApiController]
@@ -268,6 +272,7 @@ namespace AsianShop.Controllers
                     order.OrderLinesIds = string.Join(",",oLineIdList);
                     order.OrderLines = oLineList;
                 }
+                SendEmail(order);
 
                 _db.Add(order);
                 _db.SaveChanges();
@@ -441,5 +446,50 @@ namespace AsianShop.Controllers
             return Ok(product);
         }
 
+
+        public IActionResult SendEmail(Order order)
+        {
+            var oIds = order.OrderLinesIds.Split(",");
+            var html = "<table class="+"table table-striped>";
+            var thead =  "<thead> <tr> <th>Item</th> <th>Price</th> <th>Quantity</th> </tr> </thead>";
+            var tbody = "<tbody>";
+            var tfoot ="<tfoot><tr><th></th><th>Totals:</th><td>"+order.TotalPrice+"kr"+"</td></tr></tfoot> </table>";       
+            
+            foreach(var i in oIds)
+            {
+                int id = int.Parse(i);
+                var orderLine = getOrderLine(id);
+                tbody += "<tr>"+"<td class="+"scope="+"col>"+orderLine.Product.Name+"</td>" +"<td>"+orderLine.Product.Price+"</td>" + "<td>"+orderLine.Amount+"</td>";
+            }
+            tbody +="</tr> </tbody>";
+            html += thead+tbody+tfoot;
+            
+            
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("AsianShop","yourasianshop@gmail.com"));
+            message.To.Add(new MailboxAddress(order.Customer.FirstName, order.Customer.Email));
+            message.Subject = "Receipt";
+            message.Body = new TextPart(TextFormat.Html) 
+            { 
+                Text = "<h1>Thank your for your purchase "+ order.Customer.FirstName+"!</h1>"+
+                "<h3>The receipt</h3>"+ 
+                "<p>Order id: "+order.Id+"</p>"+
+                "<p>Name: "+order.Customer.FirstName + " "+ order.Customer.LastName + "</p>"+
+                "<p>Email: "+order.Customer.Email+"</p>"+
+                "<p>Phone number: "+order.Customer.PhoneNumber+"</p>"+
+                "<p>Address: "+order.Customer.PostAddress+" "+ order.Customer.PostPlace+" "+ order.Customer.PostNumber +"</p><hr>"+
+                html
+            };
+
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp.gmail.com",587,false);
+                client.Authenticate("yourasianshop@gmail.com","duerfaenstygg1");
+                client.Send(message);
+                client.Disconnect(true);
+            }
+
+            return Ok();
+        }
     }
 }

@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using MailKit.Net.Smtp;
+using MimeKit;
+using MimeKit.Text;
 
 namespace AsianShop.Areas.Identity.Pages.Account
 {
@@ -47,6 +50,14 @@ namespace AsianShop.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [Display(Name = "FirstName")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "LastName")]
+            public string LastName { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -61,6 +72,20 @@ namespace AsianShop.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Phone]
+            [Display(Name = "Phone")]
+            public string PhoneNumber { get; set; }
+
+            [Required]
+            [Display(Name = "PostAddress")]
+            public string PostAddress { get; set; }
+            [Required]
+            [Display(Name = "PostNumber")]
+            public string PostNumber { get; set; }
+            [Required]
+            [Display(Name = "PostPlace")]
+            public string PostPlace { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -75,7 +100,10 @@ namespace AsianShop.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, FirstName = 
+                Input.FirstName, LastName = Input.LastName, PhoneNumber = Input.PhoneNumber,
+                 PostAddress = Input.PostAddress, PostPlace = Input.PostPlace, PostNumber = Input.PostNumber };
+                 
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -89,8 +117,10 @@ namespace AsianShop.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    sendEmail(Input, "Confirm your email",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");/* _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");*/
+
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
@@ -110,6 +140,25 @@ namespace AsianShop.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+         public void sendEmail(InputModel input,string subject, string htmlMessage)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("AsianShop","yourasianshop@gmail.com"));
+            message.To.Add(new MailboxAddress(input.FirstName, input.Email));
+            message.Subject = subject;
+            message.Body = new TextPart(TextFormat.Html) 
+            { 
+                Text = "Hi, "+input.FirstName +", thank your for your registration!"+"<br>"+ htmlMessage
+            };
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp.gmail.com",587,false);
+                client.Authenticate("yourasianshop@gmail.com","duerfaenstygg1");
+                client.Send(message);
+                client.Disconnect(true);
+            }
         }
     }
 }
