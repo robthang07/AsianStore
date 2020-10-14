@@ -59,8 +59,9 @@
   }
   
 .sideBar {
+    margin-left: 10px;
     height: 100%;
-    width: 15%;
+    width: 13%;
     position: absolute;
     min-height: 100%;
     z-index: 1;

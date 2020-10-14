@@ -60,6 +60,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script src="~/js/clientToServerController.js" defer></script>
     <script src="~/js/cartViewController.js" defer></script>
@@ -67,10 +68,14 @@
     var currentController = (string)ViewContext.RouteData.Values["controller"] ;
     var currentAction = (string)ViewContext.RouteData.Values["action"] ;
     if (currentController != null){
-        
-        if (currentAction.Equals("Details")){
+        if(currentController.Equals("Products")){
+            if (currentAction.Equals("Details")){
              <script src="~/js/clientViewController.js" defer></script>
             }
+            else{
+                <script src="~/js/productsViewController.js" defer></script>
+            }
+        }
         if (currentController.Equals("Dashboard")){
                 <script src="~/js/dashboardController.js" defer></script>
             }
