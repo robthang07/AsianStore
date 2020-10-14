@@ -1,5 +1,6 @@
-.row2{
-    align-items: center;
+.productsRow{
+    margin-left: 15%;  
+    width: 85%;
 }
 .column {
     float:left;
@@ -10,9 +11,7 @@
 .columnDetail{
     width: 50%;
 }
-.ImageRow{
-    width: 50%;
-}
+
 .contain{
     object-fit: fill;
 }
@@ -49,4 +48,29 @@
 }
 .card img:hover{
     opacity: 0.7;
+}
+
+#wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto 0; /* the bottom margin is the negative value of the footer's height */
+    position: relative
+  }
+  
+.sideBar {
+    height: 100%;
+    width: 15%;
+    position: absolute;
+    min-height: 100%;
+    z-index: 1;
+    left: 0;
+    overflow-x: hidden;
+    background-color: white;
+    padding-top: 20px;
+}
+
+.searchBar{
+    width: 100%;
+    padding: 6px;
 }
