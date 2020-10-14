@@ -15,7 +15,7 @@
          var price = n.Price +" kr/" +n.Unit;
       <div class="column">
             <div class="card">
-               <a asp-action="Details" :asp-route-id="@n.Id">
+               <a asp-action="Details" asp-route-id="@n.Id">
                <img alt="@n.Name" class="contain" src="@picturePath" height="300" style="width:100%"/>
                </a>
                <h3>@n.Name</h3>
