@@ -8,10 +8,9 @@ class ClientToServerController{
             self.customers = response.data;
         })
     }
-    getProducts(self){
-        axios.get('api/server/products').then(function(response){
-            self.products = response.data;
-        });
+    async getProducts(self){
+        let response = await axios.get('api/server/products');
+        self.products = response.data;
     }
     getOrders(self){
         axios.get('api/server/orders').then(function(response){

@@ -67,10 +67,14 @@
     var currentController = (string)ViewContext.RouteData.Values["controller"] ;
     var currentAction = (string)ViewContext.RouteData.Values["action"] ;
     if (currentController != null){
-        
-        if (currentAction.Equals("Details")){
+        if(currentController.Equals("Products")){
+            if (currentAction.Equals("Details")){
              <script src="~/js/clientViewController.js" defer></script>
             }
+            else{
+                <script src="~/js/productsViewController.js" defer></script>
+            }
+        }
         if (currentController.Equals("Dashboard")){
                 <script src="~/js/dashboardController.js" defer></script>
             }

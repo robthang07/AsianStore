@@ -1,28 +1,43 @@
-@model IEnumerable<Product>
-<div id="wrapper">
-   <div class="sideBar">
-      <strong>Search for items</strong>
-      <input type="text" class="searchBar" placeholder="Search..">
-      <p>Types</p>
-      <a href="#services">Services</a>
-      <a href="#clients">Clients</a>
-      <a href="#contact">Contact</a>
-   </div>
-   <div class="row productsRow">
-      @foreach (var n in Model.Reverse())
-      {
-         var picturePath = n.FilePath;
-         var price = n.Price +" kr/" +n.Unit;
-      <div class="column">
-            <div class="card">
-               <a asp-action="Details" :asp-route-id="@n.Id">
-               <img alt="@n.Name" class="contain" src="@picturePath" height="300" style="width:100%"/>
-               </a>
-               <h3>@n.Name</h3>
-               <p class="price">@price</p>
-               <a asp-action="Details" asp-route-id="@n.Id"><button class="customGreen">See more</button></a>
+<div id="productsView" v-cloak>
+    <div id="wrapper">
+        <div class="sideBar">
+            <strong>Search for products</strong>
+            <input type="text" class="searchBar" placeholder="Search.." v-model="searchedWord"/>
+            <hr />
+            <h6>Price</h6>
+            <div>
+               <div>
+                  <input type="number" class="cart-quantity-input" v-model="min"> 
+                  <span>Min</span>
+               </div>
+               <div>
+                  <input type="number" class="cart-quantity-input" v-model="max"> 
+                  <span>Max</span>
+               </div>
+               <button type="button" class="btn customGreen">Search</button>
             </div>
-      </div>
-      }
-   </div>
+            <br>
+            <h6>Types</h6>
+            <div v-for="type in types">
+                <input class="test" type="checkbox" :value="type.id" v-model="checkedTypes" v-on:change="getCheckedProducts()" />
+                <label>{{type.name}}</label>
+            </div>
+            <br>
+            <h6>Origin</h6>
+        </div>
+        <div class="row productsRow">
+            <div class="column" v-for="product in filteredProducts">
+                <div class="card">
+                    <a :href="'/products/details/'+product.id">
+                        <img :alt="product.name" class="contain" :src="product.filePath" height="300" style="width: 100%;" />
+                    </a>
+                    <h3>{{product.name}}</h3>
+                    <p class="price">{{product.price}} kr/{{product.unit}}</p>
+                    <a :href="'/products/details/'+product.id">
+                        <button class="customGreen">See more</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

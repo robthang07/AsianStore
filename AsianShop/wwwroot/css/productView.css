@@ -5,7 +5,7 @@
 .column {
     float:left;
     width: 25%;
-    padding: 10px;
+    padding: 3px;
 }
 
 .columnDetail{
@@ -59,8 +59,9 @@
   }
   
 .sideBar {
+    margin-left: 10px;
     height: 100%;
-    width: 15%;
+    width: 13%;
     position: absolute;
     min-height: 100%;
     z-index: 1;
@@ -74,3 +75,15 @@
     width: 100%;
     padding: 6px;
 }
+
+.priceRangeInput {
+    height: 34px;
+    width: 100px;
+    border-radius: 5px;
+    border: 1px solid #56CCF2;
+    background-color: #eee;
+    color: #333;
+    padding: 0;
+    text-align: left;
+    font-size: 1.2em;
+  }
