@@ -1,8 +1,8 @@
 <div id="productsView" v-cloak>
     <div id="wrapper">
         <div class="sideBar">
-            <strong>Search for items</strong>
-            <input type="text" class="searchBar" placeholder="Search.." />
+            <strong>Search for products</strong>
+            <input type="text" class="searchBar" placeholder="Search.." v-model="searchedWord"/>
             <hr />
             <h6>Price</h6>
             <div>
@@ -14,7 +14,7 @@
                   <input type="number" class="cart-quantity-input" v-model="max"> 
                   <span>Max</span>
                </div>
-               <button type="button" class="btn customGreen" v-on:click="setNewPriceRange">Search</button>
+               <button type="button" class="btn customGreen">Search</button>
             </div>
             <br>
             <h6>Types</h6>
@@ -26,7 +26,7 @@
             <h6>Origin</h6>
         </div>
         <div class="row productsRow">
-            <div class="column" v-for="product in showProducts">
+            <div class="column" v-for="product in filteredProducts">
                 <div class="card">
                     <a :href="'/products/details/'+product.id">
                         <img :alt="product.name" class="contain" :src="product.filePath" height="300" style="width: 100%;" />
