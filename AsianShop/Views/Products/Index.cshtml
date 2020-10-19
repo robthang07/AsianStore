@@ -6,24 +6,23 @@
             <hr />
             <h6>Price</h6>
             <div>
-               <div>
-                  <input type="number" class="cart-quantity-input" v-model="min"> 
-                  <span>Min</span>
-               </div>
-               <div>
-                  <input type="number" class="cart-quantity-input" v-model="max"> 
-                  <span>Max</span>
-               </div>
-               <button type="button" class="btn customGreen">Search</button>
+                <div>
+                    <input type="number" class="cart-quantity-input" oninput="validity.valid||(value='');" v-model="min" />
+                    <span>Min</span>
+                </div>
+                <div>
+                    <input type="number" class="cart-quantity-input" oninput="validity.valid||(value='');" v-model="max" />
+                    <span>Max</span>
+                </div>
+                <button type="button" class="btn customGreen" v-on:click="setNewPriceRange()">Search</button>
             </div>
-            <br>
+            <br />
             <h6>Types</h6>
             <div v-for="type in types">
-                <input class="test" type="checkbox" :value="type.id" v-model="checkedTypes" v-on:change="getCheckedProducts()" />
+                <input class="test" type="checkbox" :value="type.id" v-model="checkedTypes" v-on:change="getCheckedProducts()"/>
                 <label>{{type.name}}</label>
             </div>
-            <br>
-            <h6>Origin</h6>
+            <br />
         </div>
         <div class="row productsRow">
             <div class="column" v-for="product in filteredProducts">
@@ -37,6 +36,11 @@
                         <button class="customGreen">See more</button>
                     </a>
                 </div>
+            </div>
+        </div>
+        <div class="row productsRow" >
+            <div class="column" id="emptySearch" style="display: none;">
+                <p><strong>We couldn't find what you are looking for</strong></p>
             </div>
         </div>
     </div>
