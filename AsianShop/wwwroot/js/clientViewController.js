@@ -1,6 +1,6 @@
 $(document).ready(function() {
     window.onload = checkProductAmount(), setProductAmount();
-    let itemList =[];
+    
 
     function checkProductAmount () {
         let productAmount = document.getElementById("productAmount").value;
@@ -35,6 +35,7 @@ $(document).ready(function() {
     });
 
     $("#addCart").click(function(){
+        let itemList =[];
         if(typeof(Storage) !== "undefined"){
             var item = {
                 id : document.getElementById("addCart").value,
@@ -52,6 +53,7 @@ $(document).ready(function() {
                for (const obj in oldItems) {
                     if(oldItems[obj].id == document.getElementById("addCart").value){
                         $("#amountMessage").show();
+                        $("#infoBoard").css("visibility","hidden");
                         return document.getElementById("amountMessage").innerHTML = "This product is already in your cart";
                     }
                 }
@@ -59,6 +61,7 @@ $(document).ready(function() {
                 itemList.push(item);
             }
             localStorage.setItem("items", JSON.stringify(itemList));
+            document.getElementById("amountMessage").innerHTML = "";
             $("#infoBoard").css("visibility","visible").text( document.getElementById("name").value +" is added to cart");
         }
     });

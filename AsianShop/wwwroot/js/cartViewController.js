@@ -17,8 +17,8 @@ $(document).ready(function() {
             $(".deleteButton").click(function(){
                 let index = $(this).parents("tr").index();
                 items.splice(index,1);
-                localStorage.setItem("items",JSON.stringify(items));
                 $(this).parents("tr").remove();
+                localStorage.setItem("items",JSON.stringify(items));
             });   
         }
         else{
