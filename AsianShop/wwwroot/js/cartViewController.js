@@ -18,6 +18,7 @@ $(document).ready(function() {
                 let index = $(this).parents("tr").index();
                 items.splice(index,1);
                 $(this).parents("tr").remove();
+                document.getElementById("totalPrice").innerHTML = getTotalPrice(items)+"kr";
                 localStorage.setItem("items",JSON.stringify(items));
             });   
         }
