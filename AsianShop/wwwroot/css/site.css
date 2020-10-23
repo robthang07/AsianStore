@@ -103,12 +103,14 @@ body {
   color: white;
   background: #d0b962;
   border-radius: 3px;
+  height: 354px;
 }
 
 .happyCustomer{
   color: white;
   background-color: #064403;
   border-radius: 3px;
+  height: 354px;
 }
 
 input::-webkit-outer-spin-button,
