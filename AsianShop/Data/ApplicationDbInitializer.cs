@@ -19,7 +19,7 @@ namespace AsianShop.Data
             rm.CreateAsync(adminRole).Wait();
 
             // Create users
-            var admin = new ApplicationUser { UserName = "admin@uia.no", Email = "admin@uia.no" };
+            var admin = new ApplicationUser { UserName = "admin@asianshop.no", Email = "yourashianshop@gmail.com" };
             um.CreateAsync(admin, "Password1.").Wait();
             um.AddToRoleAsync(admin, "Admin").Wait();
             admin.EmailConfirmed = true;
@@ -62,9 +62,17 @@ namespace AsianShop.Data
             var image = new FrontImage()
             {
                 Name = "image1",
-                FilePath = "/resources/Images/FrontImages/groceryStore.jpg"
+                FilePath = "/resources/Images/FrontImages/frontImage.png"
             };
             db.Add(image);
+            db.SaveChanges();
+
+            var image2 = new FrontImage()
+            {
+                Name = "image2",
+                FilePath = "/resources/Images/FrontImages/Discount.png"
+            };
+            db.Add(image2);
             db.SaveChanges();
             
             /*
