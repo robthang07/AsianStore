@@ -99,6 +99,17 @@ body {
   margin-right: 25px;
 }
 
+.customerService{
+  color: white;
+  background: #d0b962;
+  border-radius: 3px;
+}
+
+.happyCustomer{
+  color: white;
+  background-color: #064403;
+  border-radius: 3px;
+}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

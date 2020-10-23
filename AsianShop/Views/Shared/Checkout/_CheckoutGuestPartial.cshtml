@@ -1,81 +1,114 @@
 <div class="alert alert-danger" role="alert" id="invalid" style="visibility: hidden;"></div>
-<div id="checkoutGuestPartial" class="row" style="display: none;">
-    <div class="divCheck">
-        <form id="checkoutForm">
-            <h2>Check Out as a guest</h2>
-            <div class="needs-validation" novalidate>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">First name</label>
-                        <input v-model="customer.firstName" type="text" class="form-control" id="validationCustom01" placeholder="First name" required />
-                        <div class="invalid-feedback">
-                            Please fill first name.
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom02">Last name</label>
-                        <input v-model="customer.lastName" type="text" class="form-control" id="validationCustom02" placeholder="Last name" required />
-                        <div class="invalid-feedback">
-                            Please fill last name.
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-4 mb-3">
-                        <label for="validationCustomEmail">Email</label>
-                        <div class="input-group">
-                            <input type="email" v-model="customer.email" class="form-control" id="validationCustomEmail" placeholder="Email" aria-describedby="inputGroupPrepend" required />
-                            <div id="invalidEmail" class="invalid-feedback">
-                                Please write a valid email.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="validationCustomPhone">Phone number</label>
-                        <div class="input-group">
-                            <input type="text" v-model="customer.phoneNumber" class="form-control" id="validationCustomPhone" placeholder="Phone Number" aria-describedby="inputGroupPrepend" required />
+<div id="checkoutGuestPartial" style="display: none;">
+    <h1 style="text-align: center;">Checkout as a guest</h1>
+    <div class="row">
+        <div class="divCheck">
+            <form id="checkoutForm">
+                <h2 style="text-align: center;">Your info</h2>
+                <div class="needs-validation" novalidate>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">First name</label>
+                            <input v-model="customer.firstName" type="text" class="form-control" id="validationCustom01" placeholder="First name" required />
                             <div class="invalid-feedback">
-                                Please write an phone number.
+                                Please fill first name.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Last name</label>
+                            <input v-model="customer.lastName" type="text" class="form-control" id="validationCustom02" placeholder="Last name" required />
+                            <div class="invalid-feedback">
+                                Please fill last name.
                             </div>
                         </div>
                     </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustomEmail">Email</label>
+                            <div class="input-group">
+                                <input type="email" v-model="customer.email" class="form-control" id="validationCustomEmail" placeholder="Email" aria-describedby="inputGroupPrepend" required />
+                                <div id="invalidEmail" class="invalid-feedback">
+                                    Please write a valid email.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustomPhone">Phone number</label>
+                            <div class="input-group">
+                                <input type="text" v-model="customer.phoneNumber" class="form-control" id="validationCustomPhone" placeholder="Phone Number" aria-describedby="inputGroupPrepend" required />
+                                <div class="invalid-feedback">
+                                    Please write an phone number.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom03">City</label>
+                            <input type="text" v-model="customer.postPlace" class="form-control" id="validationCustom03" placeholder="City" required />
+                            <div class="invalid-feedback">
+                                Please provide a valid city.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom04">Address</label>
+                            <input type="text" v-model="customer.postAddress" class="form-control" id="validationCustom04" placeholder="Address" required />
+                            <div class="invalid-feedback">
+                                Please provide a valid address.
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom05">Zip</label>
+                            <input type="text" v-model="customer.postNumber" class="form-control" id="validationCustom05" placeholder="Zip" required />
+                            <div class="invalid-feedback">
+                                Please provide a valid zip.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="checkbox" required />
+                            <label class="form-check-label" for="invalidCheck">
+                                <p><a href="/home/privacy">Agree to terms and conditions</a></p>
+                            </label>
+                            <div id="invalidCheckbox" class="invalid-feedback">
+                                You must agree before submitting.
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn customGreen" v-on:click="checkoutGuest()">Overview</button>
                 </div>
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom03">City</label>
-                        <input type="text" v-model="customer.postPlace" class="form-control" id="validationCustom03" placeholder="City" required />
-                        <div class="invalid-feedback">
-                            Please provide a valid city.
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="validationCustom04">Address</label>
-                        <input type="text" v-model="customer.postAddress" class="form-control" id="validationCustom04" placeholder="Address" required />
-                        <div class="invalid-feedback">
-                            Please provide a valid address.
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="validationCustom05">Zip</label>
-                        <input type="text" v-model="customer.postNumber" class="form-control" id="validationCustom05" placeholder="Zip" required />
-                        <div class="invalid-feedback">
-                            Please provide a valid zip.
-                        </div>
-                    </div>
+            </form>
+        </div>
+        <div class="itemsOverview">
+            <div class="divCheck">
+                <h1 style="text-align: center;">Your items</h1>
+                <div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Item</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="item in items">
+                                <td>{{item.name}}</td>
+                                <td>{{item.price}}</td>
+                                <td>{{item.amount}}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th scope="row">Totals:</th>
+                                <td>{{totalPrice}}kr</td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
-                <div class="form-group">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="checkbox" required />
-                        <label class="form-check-label" for="invalidCheck">
-                            <p><a href="/home/privacy">Agree to terms and conditions</a></p>
-                        </label>
-                        <div id="invalidCheckbox" class="invalid-feedback">
-                            You must agree before submitting.
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="btn customGreen" v-on:click="checkoutGuest()">Overview</button>
             </div>
-        </form>
+        </div>
     </div>
 </div>
