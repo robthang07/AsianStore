@@ -1,4 +1,13 @@
 <div id="productsView" v-cloak>
+    <div class="sort">
+            <select v-model="selected" name="sorting" id="sorting" v-on:change="sort()">
+                <option disabled  value="">Select option</option>
+                <option value="priceDesc">Price: high to low</option>
+                <option value="priceAsc">Price: low to high</option>
+                <option value="nameAsc">Name: ascending</option>
+                <option value="nameDesc">Name: descending</option>
+            </select>
+    </div>
     <div id="wrapper">
         <div class="sideBar">
             <strong>Search for products</strong>
@@ -24,6 +33,7 @@
             </div>
             <br />
         </div>
+        
         <div class="row productsRow">
             <div class="column" v-for="product in filteredProducts">
                 <div class="card">
@@ -44,4 +54,5 @@
             </div>
         </div>
     </div>
+    
 </div>

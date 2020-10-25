@@ -49,6 +49,9 @@ namespace AsianShop.Data
             var item4 = new Product("Pear", 10.99M, "/resources/DatabaseFiles/Fruits/4.png", 30, fruit.id,fruit,"kg","Portugal","Exotic");
             db.Add(item4);
             db.SaveChanges();
+            var item5 = new Product("Potatoe", 5.00M, "/resources/DatabaseFiles/Vegetables/5.png", 4, vegetable.id,vegetable,"kg","Norway","Local");
+            db.Add(item5);
+            db.SaveChanges();
             
             /*
             var orderLine = new OrderLine(item,2);
