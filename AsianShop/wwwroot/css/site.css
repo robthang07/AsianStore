@@ -71,6 +71,7 @@ body {
 }
 
 .customNav{
+  height: 70px;
   background: #d0b962;
   color: white; 
 }
@@ -118,5 +119,16 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+.topMenu:hover{
+  opacity: 1;
+  border-bottom: 3px solid #064403;
+}
+
+.topMenuItems{
+  color: #064403;
+  font-size: 20px;
+}
+
 
 [v-cloak] { display: block; }
