@@ -37,17 +37,34 @@ namespace AsianShop.Data
             db.Add(vegetable);
             db.SaveChanges();
             
-            var item = new Product("Salad", 22.22M, "/resources/DatabaseFiles/Vegetables/1.png", 50, vegetable.id,vegetable,"kg","Spain","Exotic");
+            var item = new Product("Salad", 22.22f, "/resources/DatabaseFiles/Vegetables/1.png", 50, vegetable.id,vegetable,"kg","Spain","Exotic"){
+                AddedDate = new DateTime(2020, 10, 18).Date
+            };
             db.Add(item);
             db.SaveChanges();
-            var item2 = new Product("Apples", 12.99M, "/resources/DatabaseFiles/Fruits/2.png", 30, fruit.id,fruit,"kg","France","Exotic");
+            var item2 = new Product("Apples", 12.99f, "/resources/DatabaseFiles/Fruits/2.png", 30, fruit.id,fruit,"kg","France","Exotic")
+            {
+                AddedDate = new DateTime(2020, 8, 3).Date
+            };
             db.Add(item2);
             db.SaveChanges();
-            var item3 = new Product("Pizza", 12.99M, "/resources/DatabaseFiles/Hot_food/3.png", 30, hotFood.id,hotFood,"pcs","Italy","Exotic");
+            var item3 = new Product("Pizza", 12.99f, "/resources/DatabaseFiles/Hot_food/3.png", 30, hotFood.id,hotFood,"pcs","Italy","Exotic")
+            {
+                AddedDate = new DateTime(2020, 5, 9).Date
+            };
             db.Add(item3);
             db.SaveChanges();
-            var item4 = new Product("Pear", 10.99M, "/resources/DatabaseFiles/Fruits/4.png", 30, fruit.id,fruit,"kg","Portugal","Exotic");
+            var item4 = new Product("Pear", 10.99f, "/resources/DatabaseFiles/Fruits/4.png", 30, fruit.id,fruit,"kg","Portugal","Exotic")
+            {
+                AddedDate = new DateTime(2020, 3, 21).Date
+            };
             db.Add(item4);
+            db.SaveChanges();
+            var item5 = new Product("Potatoe", 5.00f, "/resources/DatabaseFiles/Vegetables/5.png", 4, vegetable.id,vegetable,"kg","Norway","Local")
+            {
+                AddedDate = new DateTime(2019, 9, 7).Date
+            };
+            db.Add(item5);
             db.SaveChanges();
             
             /*

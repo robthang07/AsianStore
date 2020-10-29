@@ -1,42 +1,77 @@
-<div id="productsView" v-cloak>
+@model PaginatedList<AsianShop.Models.Product>
+
+@{
+    IEnumerable<AsianShop.Models.Type> types = ViewData["Types"] as IEnumerable<AsianShop.Models.Type>;    
+}
+
     <div id="wrapper">
+       <form method="get" id="sortForm">
+            @Html.DropDownList("sort", new SelectList(ViewBag.sortOptions,"Value","Text"), new {@class="form-control", onchange = "sortingChanged()" })
         <div class="sideBar">
-            <strong>Search for products</strong>
-            <input type="text" class="searchBar" placeholder="Search.." v-model="searchedWord"/>
+                <strong>Search for products</strong>
+                <input type="text" class="searchBar" name="SearchString" value="@ViewData["CurrentFilter"]" placeholder="Search.."/>            
             <hr />
             <h6>Price</h6>
-            <div>
                 <div>
-                    <input type="number" class="cart-quantity-input" oninput="validity.valid||(value='');" v-model="min" />
+                    <input type="number" class="priceRangeInput" name="minPrice" value="@ViewData["MinPriceFilter"]" oninput="validity.valid||(value='');"  />
                     <span>Min</span>
                 </div>
                 <div>
-                    <input type="number" class="cart-quantity-input" oninput="validity.valid||(value='');" v-model="max" />
+                    <input type="number" class="priceRangeInput" name="maxPrice" value="@ViewData["MaxPriceFilter"]" oninput="validity.valid||(value='');" />
                     <span>Max</span>
                 </div>
-                <button type="button" class="btn customGreen" v-on:click="setNewPriceRange()">Search</button>
-            </div>
-            <br />
+                <br />
+                <hr>
             <h6>Types</h6>
-            <div v-for="type in types">
-                <input class="test" type="checkbox" :value="type.id" v-model="checkedTypes" v-on:change="getCheckedProducts()"/>
-                <label>{{type.name}}</label>
+            
+            <div>
+                @foreach (var type in types)
+                {
+                    if (ViewBag.checkedTypes != null && ViewBag.checkedTypes.Contains(type.id))
+                    {
+                        <input type="checkbox" name="checkedTypes" value="@type.id" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="checkedTypes" value="@type.id" />
+                    }
+                   
+
+                    <label>@type.Name</label>
+                     <br>
+                }
+                  
             </div>
+                <button type="submit" class="btn customGreen" >Set filters</button>
+
+            </form>
+            
             <br />
         </div>
+        
         <div class="row productsRow">
-            <div class="column" v-for="product in filteredProducts">
-                <div class="card">
-                    <a :href="'/products/details/'+product.id">
-                        <img :alt="product.name" class="contain" :src="product.filePath" height="300" style="width: 100%;" />
+
+            @{
+
+                foreach(var p in @Model)
+                {
+                    <input type="hidden" id="test" value="@p">
+                    <div class="column">
+                    <div class="card">
+                    <a asp-action="Details" asp-route-id="@p.Id">
+                        <img alt="@p.Name" class="contain" src="@p.FilePath" height="300" style="width: 100%;" />
                     </a>
-                    <h3>{{product.name}}</h3>
-                    <p class="price">{{product.price}} kr/{{product.unit}}</p>
-                    <a :href="'/products/details/'+product.id">
+                    <h3>@p.Name</h3>
+                    <p class="price">@p.Price kr/@p.Unit</p>
+                    <a asp-action="Details" asp-route-id="@p.Id">
                         <button class="customGreen">See more</button>
                     </a>
                 </div>
-            </div>
+                </div>
+                }
+                
+            }
+            
         </div>
         <div class="row productsRow" >
             <div class="column" id="emptySearch" style="display: none;">
@@ -44,4 +79,31 @@
             </div>
         </div>
     </div>
-</div>
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+    
+    <div class="nextPrev">
+        <a asp-action="Index"
+        asp-route-sortOrder="@ViewData["CurrentSort"]"
+        asp-route-pageNumber="@(Model.PageIndex - 1)"
+        asp-route-currentFilter="@ViewData["CurrentFilter"]"
+        class="btn btn-default customYellow @prevDisabled">
+            <strong><</strong>
+        </a>
+        <a asp-action="Index"
+        asp-route-sortOrder="@ViewData["CurrentSort"]"
+        asp-route-pageNumber="@(Model.PageIndex + 1)"
+        asp-route-currentFilter="@ViewData["CurrentFilter"]"
+        class="btn customYellow @nextDisabled">
+            <strong>></strong>
+        </a>
+    </div>
+    
+    <script type="text/javascript">  
+        function sortingChanged() {  
+        //Form post  
+            $("#sortForm").submit();  
+        }  
+    </script>  

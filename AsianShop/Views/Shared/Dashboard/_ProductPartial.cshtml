@@ -15,6 +15,7 @@
                <th>About</th>
                <th>Amount</th>
                <th>File Path</th>
+               <th>Added date</th>
                <th>Edit</th>
                <th>Delete</th>   
             </tr>
@@ -30,6 +31,7 @@
                <td>{{product.about}}</td>
                <td>{{product.amount}}</td>
                <td>{{product.filePath}}</td>
+               <td>{{product.addedDate}}</td>
                <td>
                   <button class="btn btn-primary" v-on:click="openEditModal(product)">Edit</button>
                </td>

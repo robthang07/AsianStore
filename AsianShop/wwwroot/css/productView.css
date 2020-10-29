@@ -72,30 +72,44 @@
     padding-top: 20px;
 }
 
+#sort{
+    height: 34px;
+    width: 215px;
+    border-radius: 5px;
+    border: 1px solid #d0b962;
+    background-color: #eee;
+    padding: 0;
+    font-size: 1.2em;
+}
 .searchBar{
     width: 100%;
     padding: 6px;
+    border-radius: 5px;
+    border: 1px solid #d0b962;
 }
 
 .priceRangeInput {
     height: 34px;
-    width: 100px;
+    width: 70px;
     border-radius: 5px;
-    border: 1px solid #56CCF2;
+    border: 1px solid #d0b962;
     background-color: #eee;
-    color: #333;
     padding: 0;
     text-align: left;
     font-size: 1.2em;
-  }
+}
 
-  #emptySearch{
+.nextPrev{
+    max-width: 150px;
+    left: 50%;
+}
+#emptySearch{
     height: 450px;
     width: 95%;
     text-align: center;
     line-height: 200px;
-  }
-  #emptySearch p {
+}
+#emptySearch p {
     font-size: x-large;
     vertical-align: middle;
-  }
+}
