@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - AsianShop</title>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/dashboard.css" />
@@ -12,29 +13,22 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow customNav">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow customNav">    
         <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                <img alt="logo" src="/Resources/Images/logo.png" width="70" height="70"/>
+             <a asp-area="" asp-controller="Home" asp-action="Index">
+                <img alt="logo" src="/Resources/Images/logo.png" width="60" height="60"/>
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <partial name="_LoginPartial" />
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
-                    </li>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
-                    }
-                </ul>
+            <div class="flex-container">
+                    <a class="nav-link text-dark topMenu" asp-area="" asp-controller="Products" asp-action="Index">
+                        <i class='fas fa-shopping-basket topMenuItems'></i><span>Products</span>
+                    </a>                    
+                    <partial name="_LoginPartial" />
+                    <div class="dropleft">
+                    <a class="nav-link text-dark dropdown-toggle topMenu" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-shopping-cart topMenuItems"></i>Cart
+                    </a>
+                    <partial name="ClientView/_CartPartial"/>
+                </div>
             </div>
         </div>
     </nav>

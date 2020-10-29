@@ -71,9 +71,9 @@ body {
 }
 
 .customNav{
-  height: 70px;
   background: #d0b962;
   color: white; 
+  height: 70px;
 }
 .customYellow{
   background: #d0b962;
@@ -129,6 +129,15 @@ input::-webkit-inner-spin-button {
   color: #064403;
   font-size: 20px;
 }
+.flex-container {
+  align-items: center;
 
+  display: flex;
+  flex-wrap: nowrap;
+}
+.flex-container > a {
+  right: 0;
+  margin: 0px;
+}
 
 [v-cloak] { display: block; }
