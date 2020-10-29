@@ -1,21 +1,9 @@
-.images{
-    height: auto;
-    opacity: 1;
-    display: block;
-    transition: .5s ease;
-    backface-visibility: hidden;
-    border-radius: 1em;
-    padding: 3em;
-}
-
-.container2 {
+.option{
     position: relative;
-    width: 30%;
-    margin: 0.2%;
-    align-content: center;
+    border-radius: 1em;
 }
-.row {
-    display: flex; 
+.option:hover .middle{
+    opacity: 1;
 }
 
 .middle {
@@ -29,17 +17,21 @@
     text-align: center;
 }
 
-.container2:hover .images {
-    opacity: 0.3;
-}
-
-.container2:hover .middle {
-    opacity: 1;
-}
 
 .text {
     background-color: #4CAF50;
     color: white;
     font-size: 16px;
+    border-radius: 1em;
     padding: 16px 32px;
+}
+
+.dashboard-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.dashboard-wrapper .option{
+    flex:150px;
+    margin: 0px;
 }
