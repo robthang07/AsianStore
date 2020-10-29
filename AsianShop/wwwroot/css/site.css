@@ -70,6 +70,8 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
+/*------------------------Robert-------------------------- */
+
 .customNav{
   background: #d0b962;
   color: white; 
@@ -85,6 +87,7 @@ body {
 }
 .startPic{
   width:100%;
+  height: 100%;
 }
 
 .cart-quantity-input {
@@ -104,14 +107,12 @@ body {
   color: white;
   background: #d0b962;
   border-radius: 3px;
-  height: 354px;
 }
 
 .happyCustomer{
   color: white;
   background-color: #064403;
   border-radius: 3px;
-  height: 354px;
 }
 
 input::-webkit-outer-spin-button,
@@ -129,15 +130,38 @@ input::-webkit-inner-spin-button {
   color: #064403;
   font-size: 20px;
 }
-.flex-container {
+.nav-flex-container {
   align-items: center;
-
   display: flex;
   flex-wrap: nowrap;
 }
-.flex-container > a {
+.nav-flex-container > a {
   right: 0;
   margin: 0px;
 }
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.wrapper .box1{
+  flex: 700px;
+}
+.wrapper .box2{
+  flex:150px;
+}
+.wrapper2 {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.wrapper2 .box2{
+  flex:300px
+}
+.wrapper2 .box1{
+  flex:150px
+}
+
 
 [v-cloak] { display: block; }
