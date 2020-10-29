@@ -125,11 +125,19 @@ input::-webkit-inner-spin-button {
   opacity: 1;
   border-bottom: 3px solid #064403;
 }
-
+.removeItem:hover{
+  opacity: 1;
+  border-bottom: 3px solid red;
+}
 .topMenuItems{
   color: #064403;
-  font-size: 20px;
+  height: 30px;
+  width: 25px;
 }
+.deleteButton{
+  color:red;
+}
+
 .nav-flex-container {
   align-items: center;
   display: flex;
