@@ -162,7 +162,7 @@ namespace AsianShop.Controllers
         public async Task<IActionResult> PostProduct([FromForm] Product product)
         {
             string stringPrice = Request.Form["newPrice"];
-            decimal price =decimal.Parse(stringPrice, System.Globalization.CultureInfo.InvariantCulture);
+            float price =float.Parse(stringPrice);
             if (product.Id != 0)
             {
                 return BadRequest();
@@ -424,7 +424,7 @@ namespace AsianShop.Controllers
         public async Task<IActionResult> PutProduct([FromForm]Product product)
         {
             string stringPrice = Request.Form["newPrice"];
-            decimal price =decimal.Parse(stringPrice, System.Globalization.CultureInfo.InvariantCulture);
+            float price =float.Parse(stringPrice);
 
             if (!_db.Products.Any(p => p.Id == product.Id))
             {

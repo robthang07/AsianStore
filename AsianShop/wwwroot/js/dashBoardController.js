@@ -17,7 +17,8 @@ $(document).ready(function() {
                 about:"",
                 unit:"",
                 type: "",
-                typeId:0
+                typeId:0,
+                addedDate:""
             },
             customers:[],
             customer:{

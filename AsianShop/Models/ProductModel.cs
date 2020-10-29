@@ -11,11 +11,12 @@ namespace AsianShop.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public uint Amount { get; set; }
-        public decimal Price { get; set; }
+        public float Price { get; set; }
 
         public string Unit { get; set; }
         public string From { get; set; }
         public string About { get; set; }
+        public DateTime AddedDate{get;set;}
         public string FilePath { get; set; }
         //File connected to path
         #if NETCOREAPP
@@ -28,8 +29,11 @@ namespace AsianShop.Models
         #endif
         public Type Type { get; set;}
 
-        public Product(){}
-        public Product(string name,decimal price, string filePath, uint amount, int id,Type type, string unit, string from, string about)
+        public Product()
+        {
+            this.AddedDate = this.AddedDate.Date;
+        }
+        public Product(string name,float price, string filePath, uint amount, int id,Type type, string unit, string from, string about)
         {
             this.Name = name;
             this.Price = price;
