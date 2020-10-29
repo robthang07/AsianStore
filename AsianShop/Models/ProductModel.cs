@@ -17,6 +17,7 @@ namespace AsianShop.Models
         public string From { get; set; }
         public string About { get; set; }
         public DateTime AddedDate{get;set;}
+        public string AddedDateString{get;set;}
         public string FilePath { get; set; }
         //File connected to path
         #if NETCOREAPP
@@ -31,7 +32,7 @@ namespace AsianShop.Models
 
         public Product()
         {
-            this.AddedDate = this.AddedDate.Date;
+            this.AddedDateString = this.AddedDate.Date.ToShortDateString();
         }
         public Product(string name,float price, string filePath, uint amount, int id,Type type, string unit, string from, string about)
         {

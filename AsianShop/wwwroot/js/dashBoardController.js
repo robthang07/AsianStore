@@ -18,7 +18,7 @@ $(document).ready(function() {
                 unit:"",
                 type: "",
                 typeId:0,
-                addedDate:""
+                addedDateString:""
             },
             customers:[],
             customer:{
