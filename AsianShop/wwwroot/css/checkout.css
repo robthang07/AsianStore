@@ -8,3 +8,9 @@
 .itemsOverview{
     padding-left: 50px;
 }
+
+.column {
+    float:left;
+    width: 25%;
+    padding: 3px;
+}
