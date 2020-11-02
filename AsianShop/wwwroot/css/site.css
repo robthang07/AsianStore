@@ -145,11 +145,18 @@ input::-webkit-inner-spin-button {
   color:red;
 }
 
+@media(max-width: 767px){
+  .nav-link .itemLabel{
+    display: none;
+  }
+}
+
 .nav-flex-container {
   align-items: center;
   display: flex;
   flex-wrap: nowrap;
 }
+
 .nav-flex-container > a {
   right: 0;
   margin: 0px;
@@ -177,6 +184,7 @@ input::-webkit-inner-spin-button {
 .wrapper2 .box1{
   flex:150px
 }
+
 
 
 [v-cloak] { display: block; }
