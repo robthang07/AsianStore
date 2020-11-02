@@ -31,3 +31,17 @@
     font-size: 1.2em;
     margin-right: 25px;
   }
+
+#changeableFont h3{
+    font-size: 3vw;
+    size:calc(100% + 2vw);
+  }
+
+#changeableFont p{
+    font-size: 3vw;
+    size:calc(100% + 2vw);
+}
+
+.card .contain{
+    height: 15vw;
+}
