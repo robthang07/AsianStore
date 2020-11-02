@@ -42,6 +42,6 @@
     size:calc(100% + 2vw);
 }
 
-.card .contain{
+.checkoutCard .contain{
     height: 15vw;
 }
