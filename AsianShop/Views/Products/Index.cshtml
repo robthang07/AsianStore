@@ -79,7 +79,7 @@
     foreach(var p in @Model)
     {
         <div class="items">
-            <div class="card">
+            <div class="card productCard">
                 <div class="productImgSize">
                     <a asp-action="Details" asp-route-id="@p.Id">
                         <img alt="@p.Name" class="contain" src="@p.FilePath" height="100%" style="width: 100%;" />
