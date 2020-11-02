@@ -52,9 +52,8 @@
 .sideBar {
     padding-top: 20px;
 }
-.item{
-    margin: 1px;
-    width: 250px;
+.items{
+    margin: 2px;
 }
 
 #sort{
@@ -106,4 +105,9 @@
 #emptySearch p {
     font-size: x-large;
     vertical-align: middle;
+}
+
+.productImgSize{
+    width: 19.271vw;
+    height: 19.271vw;
 }

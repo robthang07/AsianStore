@@ -5,94 +5,96 @@
 }
 
     
-       <form method="get" id="sortForm">
-           <div class="d-flex">
-               <button type="button" class="btn btn-success customGreen mr-auto p-2" data-toggle="modal" data-target=".sideBar">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-                    </svg>Filters
-                </button>
-                @Html.DropDownList("sort", new SelectList(ViewBag.sortOptions,"Value","Text"), new {onchange = "sortingChanged()" })
-           </div>
-            
-            <div id="wrapper">
-                <div class="sideBar modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h2 class="modal-title" style="text-align: center;">Set filters</h2>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <strong>Search for products</strong>
-                                <input type="text" class="searchBar" name="SearchString" value="@ViewData["CurrentFilter"]" placeholder="Search.."/>            
-                                <hr />
-                                <h6>Price</h6>
-                                <div>
-                                    <input type="number" class="priceRangeInput" name="minPrice" value="@ViewData["MinPriceFilter"]" oninput="validity.valid||(value='');"  />
-                                    <span>Min</span>
-                                </div>
-                                <div>
-                                    <input type="number" class="priceRangeInput" name="maxPrice" value="@ViewData["MaxPriceFilter"]" oninput="validity.valid||(value='');" />
-                                    <span>Max</span>
-                                </div>
-                                <br />
-                                <hr>
-                                <h6>Types</h6>
-                                <div>
-                                    @foreach (var type in types)
-                                    {
-                                        if (ViewBag.checkedTypes != null && ViewBag.checkedTypes.Contains(type.id))
-                                        {
-                                            <input type="checkbox" name="checkedTypes" value="@type.id" checked />
-                                        }
-                                        else
-                                        {
-                                            <input type="checkbox" name="checkedTypes" value="@type.id" />
-                                        }
-                                    
-
-                                        <label>@type.Name</label>
-                                        <br>
-                                    }
-                                </div>
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-success customGreen" >
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-                                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-                                </svg> Set filters
-                            </button>
-                            </div>
+<form method="get" id="sortForm">
+    <div class="d-flex">
+        <button type="button" class="btn btn-success customGreen mr-auto p-2" data-toggle="modal" data-target=".sideBar">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+            </svg>Filters
+        </button>
+        @Html.DropDownList("sort", new SelectList(ViewBag.sortOptions,"Value","Text"), new {onchange = "sortingChanged()" })
+    </div>
+    
+    <div id="wrapper">
+        <div class="sideBar modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" style="text-align: center;">Set filters</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <strong>Search for products</strong>
+                        <input type="text" class="searchBar" name="SearchString" value="@ViewData["CurrentFilter"]" placeholder="Search.."/>            
+                        <hr />
+                        <h6>Price</h6>
+                        <div>
+                            <input type="number" class="priceRangeInput" name="minPrice" value="@ViewData["MinPriceFilter"]" oninput="validity.valid||(value='');"  />
+                            <span>Min</span>
                         </div>
+                        <div>
+                            <input type="number" class="priceRangeInput" name="maxPrice" value="@ViewData["MaxPriceFilter"]" oninput="validity.valid||(value='');" />
+                            <span>Max</span>
+                        </div>
+                        <br />
+                        <hr>
+                        <h6>Types</h6>
+                        <div>
+                            @foreach (var type in types)
+                            {
+                                if (ViewBag.checkedTypes != null && ViewBag.checkedTypes.Contains(type.id))
+                                {
+                                    <input type="checkbox" name="checkedTypes" value="@type.id" checked />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="checkedTypes" value="@type.id" />
+                                }
+                            
+
+                                <label>@type.Name</label>
+                                <br>
+                            }
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success customGreen" >
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                        </svg> Set filters
+                    </button>
                     </div>
                 </div>
-        </form>    
-            <br />
-            @{
+            </div>
+        </div>
+</form>    
+<br />
+@{
 
-                foreach(var p in @Model)
-                {
-                    <div class="item">
-                    <div class="card">
+    foreach(var p in @Model)
+    {
+        <div class="items">
+            <div class="card">
+                <div class="productImgSize">
                     <a asp-action="Details" asp-route-id="@p.Id">
-                        <img alt="@p.Name" class="contain" src="@p.FilePath" height="300" style="width: 100%;" />
-                    </a>
-                    <h3>@p.Name</h3>
-                    <p class="price">@p.Price kr/@p.Unit</p>
-                    <a asp-action="Details" asp-route-id="@p.Id">
-                        <button class="customGreen">See more</button>
+                        <img alt="@p.Name" class="contain" src="@p.FilePath" height="100%" style="width: 100%;" />
                     </a>
                 </div>
-                </div>
-                }
+                <h3>@p.Name</h3>
+                <p class="price">@p.Price kr/@p.Unit</p>
+                <a asp-action="Details" asp-route-id="@p.Id">
+                <button class="customGreen">See more</button>
+            </a>
+            </div>
+        </div>
+    }
                 
-            }
+}
             <div class="row productsRow" >
                 <div class="column" id="emptySearch" style="display: none;">
                     <p><strong>We couldn't find what you are looking for</strong></p>
@@ -104,29 +106,29 @@
         var nextDisabled = !Model.HasNextPage ? "disabled" : "";
     }
     
-    <div id="test">
-        <div class="nextPrev">
-            <a asp-action="Index"
-            asp-route-sortOrder="@ViewData["CurrentSort"]"
-            asp-route-pageNumber="@(Model.PageIndex - 1)"
-            asp-route-currentFilter="@ViewData["CurrentFilter"]"
-            class="btn btn-default customYellow @prevDisabled">
-                <strong><</strong>
-            </a>
-            <a asp-action="Index"
-            asp-route-sortOrder="@ViewData["CurrentSort"]"
-            asp-route-pageNumber="@(Model.PageIndex + 1)"
-            asp-route-currentFilter="@ViewData["CurrentFilter"]"
-            class="btn customYellow @nextDisabled">
-                <strong>></strong>
-            </a>
-        </div>
+<div id="test">
+    <div class="nextPrev">
+        <a asp-action="Index"
+        asp-route-sortOrder="@ViewData["CurrentSort"]"
+        asp-route-pageNumber="@(Model.PageIndex - 1)"
+        asp-route-currentFilter="@ViewData["CurrentFilter"]"
+        class="btn btn-default customYellow @prevDisabled">
+            <strong><</strong>
+        </a>
+        <a asp-action="Index"
+        asp-route-sortOrder="@ViewData["CurrentSort"]"
+        asp-route-pageNumber="@(Model.PageIndex + 1)"
+        asp-route-currentFilter="@ViewData["CurrentFilter"]"
+        class="btn customYellow @nextDisabled">
+            <strong>></strong>
+        </a>
     </div>
-    <script type="text/javascript">  
-        function sortingChanged() {  
-        //Form post  
-            $("#sortForm").submit();  
-        }  
-    </script>  
+</div>
+<script type="text/javascript">  
+    function sortingChanged() {  
+    //Form post  
+        $("#sortForm").submit();  
+    }  
+</script>  
 
 
