@@ -92,7 +92,7 @@ namespace AsianShop.Controllers
             }
 
             ViewData["Types"] = _db.Types;             
-            int pageSize = 3;
+            int pageSize = 5;
             return View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking(), pageNumber??1,pageSize));
         }
         

@@ -66,6 +66,7 @@ $(document).ready(function() {
             }
         },
         created: function () {
+            this.items = itemsObj;
             this.isCartEmpty();
             this.getTotalPrice();
             clientToServer.getProducts(this);
@@ -97,9 +98,8 @@ $(document).ready(function() {
                 }
             },
            
-            getTotalPrice: function(){
+            getTotalPrice: function(items){
                 let totPrice = 0;
-                this.items = itemsObj;
                 //Iterate through the items array and getting the total price
                 for(i = 0;i < itemsObj.length; i++){
                     var price =  (itemsObj[i].price).replace(",",".");
@@ -173,6 +173,11 @@ $(document).ready(function() {
                 if(itemsObj == null || itemsObj == ""){    
                     window.location.replace("/products");
                 }
+            },
+            removeItem(index){
+                this.items.splice(index,1);
+                localStorage.setItem("items",JSON.stringify(this.items));
+                this.getTotalPrice()
             }
         }
     })

@@ -1,12 +1,3 @@
-.productsRow{
-    margin-left: 15%;  
-    width: 85%;
-}
-.column {
-    float:left;
-    width: 25%;
-    padding: 3px;
-}
 
 .columnDetail{
     width: 50%;
@@ -51,28 +42,24 @@
     opacity: 0.7;
 }
 
+
 #wrapper {
-    min-height: 100%;
-    height: auto !important;
-    height: 100%;
-    margin: 0 auto 0; /* the bottom margin is the negative value of the footer's height */
-    position: relative
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
   }
   
 .sideBar {
-    margin-left: 10px;
-    height: 100%;
-    width: 13%;
-    position: absolute;
-    min-height: 100%;
-    z-index: 1;
-    left: 0;
-    overflow-x: hidden;
-    background-color: white;
     padding-top: 20px;
+}
+.item{
+    margin: 1px;
+    width: 250px;
 }
 
 #sort{
+    align-items: flex-end;
+    right: 0;
     height: 34px;
     width: 215px;
     border-radius: 5px;
@@ -99,9 +86,16 @@
     font-size: 1.2em;
 }
 
+#test{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
 .nextPrev{
+    margin: auto;
     max-width: 150px;
-    left: 50%;
+    right: 0;
 }
 #emptySearch{
     height: 450px;
