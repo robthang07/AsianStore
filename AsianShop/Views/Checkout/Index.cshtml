@@ -115,10 +115,15 @@
                             </tr>
                         </tfoot>
                     </table>
+                    <div class="modal fade" id="loaderModal" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="loader"></div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn customGreen" v-on:click="purchase">Purchase</button>
+                    <button type="button" class="btn customGreen" v-on:click="purchase" data-toggle="modal" data-target="#loaderModal">Purchase</button>
                 </div>
             </div>
         </div>
