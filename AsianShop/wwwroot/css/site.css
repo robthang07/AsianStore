@@ -185,6 +185,28 @@ input::-webkit-inner-spin-button {
   flex:150px
 }
 
+.carousel-inner .carousel-item{
+  height: 42.5vw;
+}
 
+.wrapper h3{
+  animation-duration: 3s;
+  animation-name: slidein;
+}
+.wrapper2 h3{
+  animation-duration: 3s;
+  animation-name: slidein;
+}
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%; 
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
 
 [v-cloak] { display: block; }
