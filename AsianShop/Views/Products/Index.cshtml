@@ -72,39 +72,40 @@
                 </div>
             </div>
         </div>
+    </div>
 </form>    
 <br />
-@{
-
-    foreach(var p in @Model)
-    {
-        <div class="items">
-            <div class="card productCard">
-                <div class="productImgSize">
-                    <a asp-action="Details" asp-route-id="@p.Id">
-                        <img alt="@p.Name" class="contain" src="@p.FilePath" height="100%" style="width: 100%;" />
-                    </a>
-                </div>
-                <h3>@p.Name</h3>
-                <p class="price">@p.Price kr/@p.Unit</p>
-                <a asp-action="Details" asp-route-id="@p.Id">
-                <button class="btn-success customGreen">See more</button>
-            </a>
-            </div>
-        </div>
-    }
-                
-}
-            <div class="row productsRow" >
-                <div class="column" id="emptySearch" style="display: none;">
-                    <p><strong>We couldn't find what you are looking for</strong></p>
-                </div>
-            </div>
-    </div>
+<div id="wrapper">
     @{
-        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        foreach(var p in @Model)
+        {
+            <div class="items">
+                <div class="card productCard">
+                    <div class="productImgSize">
+                        <a asp-action="Details" asp-route-id="@p.Id">
+                            <img alt="@p.Name" class="contain" src="@p.FilePath" height="100%" style="width: 100%;" />
+                        </a>
+                    </div>
+                    <h3>@p.Name</h3>
+                    <p class="price">@p.Price kr/@p.Unit</p>
+                    <a asp-action="Details" asp-route-id="@p.Id">
+                    <button class="btn-success customGreen">See more</button>
+                </a>
+                </div>
+            </div>
+        }
+                    
     }
+    <div class="row productsRow" >
+        <div class="column" id="emptySearch" style="display: none;">
+            <p><strong>We couldn't find what you are looking for</strong></p>
+        </div>
+    </div>
+</div>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
     
 <div id="test">
     <div class="nextPrev">
