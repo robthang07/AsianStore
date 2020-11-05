@@ -115,7 +115,7 @@
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
     
-<div id="test">
+<div id="pages">
     <div class="nextPrev">
         <a asp-action="Index"
         asp-route-sortOrder="@ViewData["CurrentSort"]"
@@ -124,6 +124,29 @@
         class="btn btn-default customYellow @prevDisabled">
             <strong><</strong>
         </a>
+        @for(var i = 1; i <= @Model.TotalPages; i++)
+        {
+            if(i == @Model.PageIndex)
+            {
+                <a asp-action="Index"
+                asp-route-sortOrder="@ViewData["CurrentSort"]"
+                asp-route-pageNumber="@(i)"
+                asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                class="btn customGreen">
+                    <strong>@i</strong>
+                </a>
+            }
+            else{
+                <a asp-action="Index"
+                asp-route-sortOrder="@ViewData["CurrentSort"]"
+                asp-route-pageNumber="@(i)"
+                asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                class="btn customYellow">
+                    <strong>@i</strong>
+                </a>
+            }
+            
+        }
         <a asp-action="Index"
         asp-route-sortOrder="@ViewData["CurrentSort"]"
         asp-route-pageNumber="@(Model.PageIndex + 1)"

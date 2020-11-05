@@ -90,16 +90,13 @@
     font-size: 1.2em;
 }
 
-#test{
-    width: 100%;
+#pages{
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    margin: auto;
+
 }
 .nextPrev{
     margin: auto;
-    max-width: 150px;
-    right: 0;
 }
 #emptySearch{
     height: 450px;
