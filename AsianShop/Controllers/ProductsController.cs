@@ -56,7 +56,7 @@ namespace AsianShop.Controllers
             
             if (!string.IsNullOrEmpty(searchString))
             {
-                products = products.Where(p => p.Name.ToLower().Contains(searchString));
+                products = products.Where(p => p.Name.ToLower().Contains(searchString) || (""+p.Id).Contains(searchString));
             }
             if (maxPrice != 0 || minPrice != 0)
             {
