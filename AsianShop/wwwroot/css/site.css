@@ -197,6 +197,29 @@ input::-webkit-inner-spin-button {
   animation-duration: 3s;
   animation-name: slidein;
 }
+
+#available{
+  height: 610px;
+  width: auto;
+  background: url("../Resources/Images/available.png") center fixed;
+  background-repeat: no-repeat;
+  background-size: cover !important;
+  text-align: center;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  color: white;
+  width: auto;
+}
+#available h1{
+  font-size: 70px;
+}
+
+#availableText{
+  margin: auto;
+  width: 60%;
+}
+
 @keyframes slidein {
   from {
     margin-left: 100%;
